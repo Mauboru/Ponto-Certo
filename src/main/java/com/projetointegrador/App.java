@@ -19,7 +19,6 @@ public class App extends BaseAppNavigator {
 
     @Override
     public void registrarTelas() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'registrarTelas'");
     }
 }
