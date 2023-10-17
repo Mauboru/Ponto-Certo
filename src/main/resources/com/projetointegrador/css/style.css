@@ -1,0 +1,22 @@
+#root{
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+
+#fundo{
+    -fx-background-color: rgb(255, 255, 255);
+}
+
+#h1{
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+    -fx-text-align: center;
+}
+
+#h2{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#input{
+    
+}

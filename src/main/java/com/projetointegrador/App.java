@@ -9,16 +9,19 @@ public class App extends BaseAppNavigator {
 
     @Override
     public String getAppTitle() {
-        return null;
+        return "Ponto-Certo";
     }
 
     @Override
     public String getHome() {
-        return null;
+        return "LOGIN";
     }
 
     @Override
     public void registrarTelas() {
-        throw new UnsupportedOperationException("Unimplemented method 'registrarTelas'");
+        registraTela("LOGIN",
+                 new ScreenRegistryFXML(App.class,
+                        "cadastrar.fxml",
+                        o -> new Cadastrar()));
     }
 }
