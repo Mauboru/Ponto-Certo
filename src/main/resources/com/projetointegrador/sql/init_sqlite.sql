@@ -12,3 +12,4 @@
 --     prazo DATE NOT NULL,
 --     FOREIGN KEY (categoriaId) REFERENCES categorias(id)
 -- );
+

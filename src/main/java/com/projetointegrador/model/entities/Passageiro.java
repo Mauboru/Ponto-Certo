@@ -8,8 +8,7 @@ public class Passageiro {
     private String login;
     private String senha;
 
-    public Passageiro(int id, String nome, String cpf, String email, String login, String senha) {
-        this.id = id;
+    public Passageiro(String nome, String cpf, String email, String login, String senha){
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
