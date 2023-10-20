@@ -17,6 +17,14 @@
     -fx-font-weight: bold;
 }
 
-#input{
-    
+#button{
+    -fx-background-color: black;
+}
+
+#buttonSair{
+    -fx-background-color: red;
+}
+
+#button:hover, #buttonSair{
+    -fx-text-fill: white;
 }

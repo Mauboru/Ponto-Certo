@@ -14,19 +14,15 @@ public class RepositorioPassageiro {
         this.passageiroDAO = passageiroDAO;
     }
 
-    public Resultado cadastrar(String nome, String cpf, String email, String login, String senha) {
+    public Resultado cadastrar(String nome, String email, String senha) {
         if (nome.isEmpty() || nome.isBlank())
             return Resultado.erro("Nome inválido!");
-        if (cpf.isEmpty() || cpf.isBlank())
-            return Resultado.erro("CPF inválido!");
         if (email.isEmpty() || email.isBlank())
             return Resultado.erro("Email inválido!");
-        if (login.isEmpty() || login.isBlank())
-            return Resultado.erro("Login inválido!");
         if (senha.isEmpty() || senha.isBlank())
             return Resultado.erro("Senha inválido!");
 
-        Passageiro passageiro = new Passageiro(nome, cpf, email, login, senha);
+        Passageiro passageiro = new Passageiro(nome, email, senha);
         return passageiroDAO.cadastrar(passageiro);
     }
 }

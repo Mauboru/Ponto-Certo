@@ -1,15 +1,54 @@
--- CREATE TABLE IF NOT EXISTS categorias (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     nome varchar(255) NOT NULL,
---     descricao varchar(255) NOT NULL
--- );
+CREATE TABLE IF NOT EXISTS PIOnibus (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(7) NOT NULL,
+    cor VARCHAR(45) NOT NULL,
+    qtdTotalPassageiros INT NOT NULL
+);
 
--- CREATE TABLE IF NOT EXISTS tarefas (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     titulo varchar(255) NOT NULL,
---     descricao varchar(255) NOT NULL,
---     categoriaId INT NOT NULL,
---     prazo DATE NOT NULL,
---     FOREIGN KEY (categoriaId) REFERENCES categorias(id)
--- );
+CREATE TABLE IF NOT EXISTS PIPonto (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL
+);
 
+CREATE TABLE IF NOT EXISTS PIRota (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL,
+    pontoInicial INT NOT NULL,
+    pontoFinal INT NOT NULL,
+    FOREIGN KEY (pontoInicial) REFERENCES PIPonto (id),
+    FOREIGN KEY (pontoFinal) REFERENCES PIPonto (id)
+);
+
+CREATE TABLE IF NOT EXISTS PIAvaliacao (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nota INT NOT NULL,
+    comentario VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS PIPassageiro (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    login VARCHAR(45) NOT NULL,
+    senha VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS PIViagem (
+    id INT NOT NULL AUTO_INCREMENT,
+    idOnibus INT NOT NULL,
+    idRota INT NOT NULL,
+    PRIMARY KEY (id, idOnibus),
+    FOREIGN KEY (idRota) REFERENCES PIRota (id),
+    FOREIGN KEY (idOnibus)REFERENCES PIOnibus (id)
+);
+
+CREATE TABLE IF NOT EXISTS PIPassageiroViagem (
+  idViagem INT NOT NULL,
+  idAvaliacao INT NOT NULL,
+  idPassageiro INT NOT NULL,
+  PRIMARY KEY (idViagem, idAvaliacao, idPassageiro),
+  FOREIGN KEY (idViagem) REFERENCES PIViagem (id),
+  FOREIGN KEY (idAvaliacao) REFERENCES PIAvaliacao (id),
+  FOREIGN KEY (idPassageiro) REFERENCES PIPassageiro (id)
+);

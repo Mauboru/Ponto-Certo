@@ -1,12 +1,13 @@
 package com.projetointegrador;
 
 import com.projetointegrador.controllers.Cadastrar;
+import com.projetointegrador.model.daos.*;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
-
 import io.github.hugoperlin.navigatorfx.*;
 
 public class App extends BaseAppNavigator {
-    private RepositorioPassageiro repositorioPassageiro;
+    private PassageiroDAO passageiroDAO = new JDBCPassageiroDAO(FabricaConexoes.getInstance());
+    private RepositorioPassageiro repositorioPassageiro = new RepositorioPassageiro(passageiroDAO);
     
     public static void main(String[] args) {
         launch();
