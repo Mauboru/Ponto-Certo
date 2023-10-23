@@ -25,4 +25,30 @@ public class RepositorioPassageiro {
         Passageiro passageiro = new Passageiro(nome, email, senha);
         return passageiroDAO.cadastrar(passageiro);
     }
+
+    public Resultado listar(){
+        return null;
+    }
+
+    public Resultado atualizar(){
+        return null;
+    }
+
+    public Resultado deletar(){
+        return null;
+    }
+
+    public Resultado login(String usuario, String senha){
+        if (usuario.isEmpty() || usuario.isBlank())
+            return Resultado.erro("Usuario inválido!");
+        if (senha.isEmpty() || senha.isBlank())
+            return Resultado.erro("Senha inválida!");
+
+        return passageiroDAO.login(usuario, senha);
+    }
+
+    // Remover essa função
+    public Passageiro teste() {
+        return passageiro.get(0);
+    }
 }

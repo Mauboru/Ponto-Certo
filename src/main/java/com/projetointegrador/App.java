@@ -1,6 +1,7 @@
 package com.projetointegrador;
 
 import com.projetointegrador.controllers.Cadastrar;
+import com.projetointegrador.controllers.Login;
 import com.projetointegrador.model.daos.*;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
 import io.github.hugoperlin.navigatorfx.*;
@@ -20,11 +21,15 @@ public class App extends BaseAppNavigator {
 
     @Override
     public String getHome() {
-        return "CADASTRAR";
+        return "LOGIN";
     }
 
     @Override
     public void registrarTelas() {
+        registraTela("LOGIN", 
+                new ScreenRegistryFXML(App.class, 
+                        "login.fxml", 
+                        o -> new Login(repositorioPassageiro)));
         registraTela("CADASTRAR",
                  new ScreenRegistryFXML(App.class,
                         "cadastrar.fxml",

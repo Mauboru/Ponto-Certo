@@ -8,7 +8,9 @@ public interface PassageiroDAO {
 
     Resultado exibir();
 
-    Resultado editar();
+    Resultado atualizar(int id, Passageiro novo);
 
-    Resultado desativar();
+    Resultado deletar(int id);
+
+    Resultado login(String usuario, String senha);
 }
