@@ -2,12 +2,15 @@ package com.projetointegrador;
 
 import com.projetointegrador.controllers.*;
 import com.projetointegrador.model.daos.*;
-import com.projetointegrador.model.repositories.RepositorioPassageiro;
+import com.projetointegrador.model.repositories.*;
 import io.github.hugoperlin.navigatorfx.*;
 
 public class App extends BaseAppNavigator {
     private PassageiroDAO passageiroDAO = new JDBCPassageiroDAO(FabricaConexoes.getInstance());
     private RepositorioPassageiro repositorioPassageiro = new RepositorioPassageiro(passageiroDAO);
+
+    private OnibusDAO onibusDAO = new JDBCOnibusDAO(FabricaConexoes.getInstance());
+    private RepositorioOnibus repositorioOnibus = new RepositorioOnibus(onibusDAO);
     
     public static void main(String[] args) {
         launch();
@@ -37,6 +40,6 @@ public class App extends BaseAppNavigator {
         registraTela("PRINCIPAL",
                  new ScreenRegistryFXML(App.class,
                         "principal.fxml",
-                        o -> new Principal()));
+                        o -> new Principal(repositorioOnibus)));
     }
 }
