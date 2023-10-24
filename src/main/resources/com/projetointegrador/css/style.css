@@ -6,6 +6,10 @@
     -fx-background-color: rgb(255, 255, 255);
 }
 
+#fundo2{
+    -fx-border-color: black;
+}
+
 #h1{
     -fx-font-weight: bold;
     -fx-font-size: 25px;
@@ -15,6 +19,11 @@
 #h2{
     -fx-font-size: 15px;
     -fx-font-weight: bold;
+}
+
+#btMeuPerfil:hover{
+    -fx-cursor: hand;
+    -fx-visibility: hidden;
 }
 
 #button{

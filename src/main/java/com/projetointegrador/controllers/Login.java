@@ -43,6 +43,7 @@ public class Login {
             alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
             tfEmail.clear();
             tfSenha.clear();
+            App.pushScreen("PRINCIPAL");
         }
         alerta.showAndWait();
     }

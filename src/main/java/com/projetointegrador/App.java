@@ -1,7 +1,6 @@
 package com.projetointegrador;
 
-import com.projetointegrador.controllers.Cadastrar;
-import com.projetointegrador.controllers.Login;
+import com.projetointegrador.controllers.*;
 import com.projetointegrador.model.daos.*;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
 import io.github.hugoperlin.navigatorfx.*;
@@ -21,6 +20,7 @@ public class App extends BaseAppNavigator {
 
     @Override
     public String getHome() {
+        //Verificar antes se o usuario ja n esta logado
         return "LOGIN";
     }
 
@@ -34,5 +34,9 @@ public class App extends BaseAppNavigator {
                  new ScreenRegistryFXML(App.class,
                         "cadastrar.fxml",
                         o -> new Cadastrar(repositorioPassageiro)));
+        registraTela("PRINCIPAL",
+                 new ScreenRegistryFXML(App.class,
+                        "principal.fxml",
+                        o -> new Principal()));
     }
 }

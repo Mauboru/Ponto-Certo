@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="root" prefHeight="480.0" prefWidth="640.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetointegrador.controllers.Principal">
+   <children>
+      <Pane fx:id="fundo" layoutX="35.0" layoutY="40.0" prefHeight="400.0" prefWidth="576.0">
+         <children>
+            <Label fx:id="h1" layoutX="189.0" layoutY="35.0" text="Ponto-Certo" textAlignment="CENTER" />
+            <ImageView fitHeight="61.0" fitWidth="95.0" layoutX="326.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/title.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btMeuPerfil" fitHeight="61.0" fitWidth="95.0" layoutX="494.0" layoutY="22.0" onMouseClicked="#exibir" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/user.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="fundo2" layoutX="15.0" layoutY="22.0" prefHeight="76.0" prefWidth="153.0">
+               <children>
+                  <Label fx:id="h2" alignment="CENTER" layoutX="30.0" layoutY="12.0" prefHeight="28.0" prefWidth="83.0" text="Pesquisar" />
+                  <ComboBox fx:id="cbOnibus" layoutX="13.0" layoutY="40.0" prefHeight="25.0" prefWidth="120.0" promptText="Ônibus" />
+               </children>
+            </Pane>
+            <Pane fx:id="fundo2" layoutX="15.0" layoutY="107.0" prefHeight="271.0" prefWidth="544.0">
+               <children>
+                  <ImageView fx:id="imgRotas" fitHeight="242.0" fitWidth="514.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</Pane>

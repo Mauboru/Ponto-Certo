@@ -40,9 +40,9 @@ public class RepositorioPassageiro {
 
     public Resultado login(String usuario, String senha){
         if (usuario.isEmpty() || usuario.isBlank())
-            return Resultado.erro("Usuario inválido!");
+            return Resultado.erro("Insira um usuário!");
         if (senha.isEmpty() || senha.isBlank())
-            return Resultado.erro("Senha inválida!");
+            return Resultado.erro("Insira uma senha!");
 
         return passageiroDAO.login(usuario, senha);
     }
