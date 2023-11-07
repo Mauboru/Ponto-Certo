@@ -13,4 +13,6 @@ public interface PassageiroDAO {
     Resultado deletar(int id);
 
     Resultado login(String usuario, String senha);
+
+    Resultado logout();
 }

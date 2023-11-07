@@ -31,7 +31,7 @@ public class Principal implements Initializable {
 
     @FXML
     void exibir(MouseEvent event) {
-        App.pushScreen("MEUPERFIL");
+        App.pushScreen("PERFIL");
     }
 
     @FXML

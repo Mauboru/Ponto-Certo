@@ -47,6 +47,10 @@ public class RepositorioPassageiro {
         return passageiroDAO.login(usuario, senha);
     }
 
+    public Resultado logout(){
+        return passageiroDAO.logout();
+    }
+
     // Remover essa função
     public Passageiro teste() {
         return passageiro.get(0);

@@ -115,7 +115,24 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
             if(rs.next()){
                 return Resultado.sucesso("Login feito com Sucesso!", senha);
             }
-            return Resultado.erro("Usuario no encontrado!");
+            return Resultado.erro("Usuario não encontrado!");
+            
+        }catch(SQLException e){
+            return Resultado.erro(e.getMessage());
+        }
+    }
+
+    @Override
+    public Resultado logout(){
+        try(Connection con = fabrica.getConnection()){
+            PreparedStatement pstm = con.prepareStatement(LOGINSQL);
+
+            ResultSet rs = pstm.executeQuery();
+
+            if(rs.next()){
+                return Resultado.sucesso("Login feito com Sucesso!", rs);
+            }
+            return Resultado.erro("Usuario não encontrado!");
             
         }catch(SQLException e){
             return Resultado.erro(e.getMessage());
