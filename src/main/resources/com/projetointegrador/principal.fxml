@@ -21,15 +21,19 @@
                   <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <Pane fx:id="fundo2" layoutX="15.0" layoutY="22.0" prefHeight="76.0" prefWidth="153.0">
-               <children>
-                  <Label fx:id="h2" alignment="CENTER" layoutX="30.0" layoutY="12.0" prefHeight="28.0" prefWidth="83.0" text="Pesquisar" />
-                  <ComboBox fx:id="cbOnibus" layoutX="9.0" layoutY="40.0" prefHeight="25.0" prefWidth="136.0" promptText="Selecione a Linha" />
-               </children>
-            </Pane>
             <Pane fx:id="fundo2" layoutX="15.0" layoutY="107.0" prefHeight="271.0" prefWidth="544.0">
                <children>
-                  <ImageView fx:id="imgRotas" fitHeight="242.0" fitWidth="514.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgRotas" fitHeight="244.0" fitWidth="633.0" layoutX="272.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/pgua.PNG" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="fundo2" layoutX="14.0" layoutY="14.0" prefHeight="76.0" prefWidth="153.0">
+                     <children>
+                        <Label fx:id="h2" alignment="CENTER" layoutX="30.0" layoutY="12.0" prefHeight="28.0" prefWidth="83.0" text="Pesquisar" />
+                        <ComboBox fx:id="cbRota" layoutX="9.0" layoutY="40.0" onAction="#atualizaRota" prefHeight="25.0" prefWidth="136.0" promptText="Selecione a Rota" />
+                     </children>
+                  </Pane>
                </children>
             </Pane>
          </children>

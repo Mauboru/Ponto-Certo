@@ -2,8 +2,7 @@ package com.projetointegrador.controllers;
 
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.App;
-import com.projetointegrador.model.repositories.RepositorioPassageiro;
-
+import com.projetointegrador.model.repositories.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,8 +21,6 @@ public class Login {
         this.repositorioPassageiro = repositorioPassageiro;
     }
 
-    // Funções Override
-
     // Funções FXML
     @FXML
     void cadastrar(ActionEvent event) {
@@ -39,14 +36,12 @@ public class Login {
 
         if (resultado.foiErro()) {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
+            alerta.showAndWait();
         } else {
-            alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
             tfEmail.clear();
             tfSenha.clear();
             App.pushScreen("PRINCIPAL");
         }
-        alerta.showAndWait();
+        
     }
-
-    // Funções
 }

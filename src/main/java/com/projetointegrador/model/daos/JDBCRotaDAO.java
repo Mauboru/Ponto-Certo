@@ -3,32 +3,30 @@ package com.projetointegrador.model.daos;
 import java.sql.*;
 import java.util.ArrayList;
 import com.github.hugoperlin.results.Resultado;
-import com.projetointegrador.model.entities.Onibus;
+import com.projetointegrador.model.entities.Rota;
 
-public class JDBCOnibusDAO implements OnibusDAO {
-    private static final String SELECTSQL = "SELECT * FROM PIOnibus";
+public class JDBCRotaDAO implements RotaDAO {
+    private static final String SELECTSQL = "SELECT * FROM PIRota";
 
     private FabricaConexoes fabrica;
 
-    public JDBCOnibusDAO(FabricaConexoes fabrica) {
+    public JDBCRotaDAO(FabricaConexoes fabrica) {
         this.fabrica = fabrica;
     }
 
     @Override
-    public Resultado exibir() {
+    public Resultado listar() {
         try(Connection con = fabrica.getConnection()){
             PreparedStatement pstm = con.prepareStatement(SELECTSQL);
             ResultSet rs = pstm.executeQuery();
-            ArrayList<Onibus> lista = new ArrayList<>();
+            ArrayList<Rota> lista = new ArrayList<>();
 
             while(rs.next()){
                 int id = rs.getInt("id");
-                String placa = rs.getString("placa");
-                String cor = rs.getString("cor");
-                int qtdTotalPassageiro = rs.getInt("qtdTotalPassageiro");
+                String nome = rs.getString("nome");
 
-                Onibus onibus = new Onibus(id, placa, cor, qtdTotalPassageiro);
-                lista.add(onibus);
+                Rota rotas = new Rota(id, nome);
+                lista.add(rotas);
             }
             return Resultado.sucesso("Lista carregada!", lista);    
         }catch(SQLException e){

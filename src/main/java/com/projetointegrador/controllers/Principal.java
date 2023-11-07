@@ -5,25 +5,27 @@ import java.util.List;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.App;
-import com.projetointegrador.model.entities.Onibus;
-import com.projetointegrador.model.repositories.RepositorioOnibus;
+import com.projetointegrador.model.entities.Rota;
+import com.projetointegrador.model.repositories.RepositorioRota;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class Principal implements Initializable{
-    RepositorioOnibus repositorioOnibus;
+public class Principal implements Initializable {
+    RepositorioRota repositorioOnibus;
 
     @FXML
-    private ComboBox<Onibus> cbOnibus;
+    private ComboBox<Rota> cbRota;
 
     @FXML
     private ImageView imgRotas;
 
-    public Principal(RepositorioOnibus repositorioOnibus){
+    public Principal(RepositorioRota repositorioOnibus) {
         this.repositorioOnibus = repositorioOnibus;
     }
 
@@ -32,13 +34,18 @@ public class Principal implements Initializable{
         App.pushScreen("MEUPERFIL");
     }
 
+    @FXML
+    void atualizaRota(ActionEvent event) {
+        imgRotas = new ImageView(new Image("src\\\\main\\\\resources\\\\com\\\\projetointegrador\\\\img\\\\porto-seguro.PNG"));
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         Resultado resultado = repositorioOnibus.listar();
 
         if (resultado.foiSucesso()) {
-            List<Onibus> list = (List) resultado.comoSucesso().getObj();
-            cbOnibus.getItems().addAll(list);
+            List<Rota> list = (List) resultado.comoSucesso().getObj();
+            cbRota.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
             alert.showAndWait();

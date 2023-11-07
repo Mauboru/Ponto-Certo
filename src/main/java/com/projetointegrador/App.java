@@ -9,8 +9,8 @@ public class App extends BaseAppNavigator {
     private PassageiroDAO passageiroDAO = new JDBCPassageiroDAO(FabricaConexoes.getInstance());
     private RepositorioPassageiro repositorioPassageiro = new RepositorioPassageiro(passageiroDAO);
 
-    private OnibusDAO onibusDAO = new JDBCOnibusDAO(FabricaConexoes.getInstance());
-    private RepositorioOnibus repositorioOnibus = new RepositorioOnibus(onibusDAO);
+    private RotaDAO rotaDAO = new JDBCRotaDAO(FabricaConexoes.getInstance());
+    private RepositorioRota repositorioRota = new RepositorioRota(rotaDAO);
     
     public static void main(String[] args) {
         launch();
@@ -24,7 +24,7 @@ public class App extends BaseAppNavigator {
     @Override
     public String getHome() {
         //Verificar antes se o usuario ja n esta logado
-        return "LOGIN";
+        return "PRINCIPAL";
     }
 
     @Override
@@ -40,6 +40,6 @@ public class App extends BaseAppNavigator {
         registraTela("PRINCIPAL",
                  new ScreenRegistryFXML(App.class,
                         "principal.fxml",
-                        o -> new Principal(repositorioOnibus)));
+                        o -> new Principal(repositorioRota)));
     }
 }
