@@ -36,7 +36,17 @@ public class Principal implements Initializable {
 
     @FXML
     void atualizaRota(ActionEvent event) {
-        imgRotas = new ImageView(new Image("src\\\\main\\\\resources\\\\com\\\\projetointegrador\\\\img\\\\porto-seguro.PNG"));
+        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Porto Seguro")){
+            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/porto-seguro.PNG").toExternalForm()));
+        }
+
+        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Jardim Iguaçu")){
+            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/jardim-iguacu.PNG").toExternalForm()));
+        }
+
+        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Vila Garcia")){
+            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/vila-garcia.PNG").toExternalForm()));
+        }
     }
 
     @Override
