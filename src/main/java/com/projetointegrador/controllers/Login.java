@@ -21,7 +21,6 @@ public class Login {
         this.repositorioPassageiro = repositorioPassageiro;
     }
 
-    // Funções FXML
     @FXML
     void cadastrar(ActionEvent event) {
         App.pushScreen("CADASTRAR");

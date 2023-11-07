@@ -24,7 +24,7 @@ public class App extends BaseAppNavigator {
     @Override
     public String getHome() {
         //Verificar antes se o usuario ja n esta logado
-        return "PRINCIPAL";
+        return "LOGIN";
     }
 
     @Override

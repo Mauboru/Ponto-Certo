@@ -23,7 +23,7 @@
             </ImageView>
             <Pane fx:id="fundo2" layoutX="15.0" layoutY="107.0" prefHeight="271.0" prefWidth="544.0">
                <children>
-                  <ImageView fx:id="imgRotas" fitHeight="244.0" fitWidth="633.0" layoutX="272.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgRotas" fitHeight="244.0" fitWidth="633.0" layoutX="272.0" layoutY="14.0" onSwipeLeft="#zoomout" onSwipeRight="#zooming" onZoom="#zooming" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/pgua.PNG" />
                      </image>

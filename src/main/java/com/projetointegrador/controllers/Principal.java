@@ -10,11 +10,13 @@ import com.projetointegrador.model.repositories.RepositorioRota;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ZoomEvent;
 
 public class Principal implements Initializable {
     RepositorioRota repositorioOnibus;
@@ -36,17 +38,32 @@ public class Principal implements Initializable {
 
     @FXML
     void atualizaRota(ActionEvent event) {
-        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Porto Seguro")){
-            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/porto-seguro.PNG").toExternalForm()));
+        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Porto Seguro")) {
+            imgRotas.setImage(
+                    new Image(getClass().getResource("/com/projetointegrador/img/porto-seguro.PNG").toExternalForm()));
         }
 
-        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Jardim Iguaçu")){
-            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/jardim-iguacu.PNG").toExternalForm()));
+        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Jardim Iguaçu")) {
+            imgRotas.setImage(
+                    new Image(getClass().getResource("/com/projetointegrador/img/jardim-iguacu.PNG").toExternalForm()));
         }
 
-        if(cbRota.getSelectionModel().getSelectedItem().getNome().equals("Vila Garcia")){
-            imgRotas.setImage(new Image(getClass().getResource("/com/projetointegrador/img/vila-garcia.PNG").toExternalForm()));
+        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Vila Garcia")) {
+            imgRotas.setImage(
+                    new Image(getClass().getResource("/com/projetointegrador/img/vila-garcia.PNG").toExternalForm()));
         }
+    }
+
+    @FXML
+    void zooming(ZoomEvent event) {
+        imgRotas.setScaleX(imgRotas.getScaleX() + 1);
+        imgRotas.setScaleY(imgRotas.getScaleY() + 1);
+    }
+
+    @FXML
+    void zoomout(MouseEvent event) {
+        imgRotas.setScaleX(imgRotas.getScaleX() - 1);
+        imgRotas.setScaleY(imgRotas.getScaleY() - 1);
     }
 
     @Override
