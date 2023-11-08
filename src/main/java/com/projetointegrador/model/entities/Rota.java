@@ -3,8 +3,6 @@ package com.projetointegrador.model.entities;
 public class Rota {
     private int id;
     private String nome;
-    // private Ponto pontoInicial;
-    // private Ponto pontoFinal;
 
     public Rota(int id, String nome) {
         this.id = id;
