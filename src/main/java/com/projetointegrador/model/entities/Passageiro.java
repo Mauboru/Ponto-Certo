@@ -49,5 +49,5 @@ public class Passageiro {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }  
+    }
 }

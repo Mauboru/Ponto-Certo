@@ -27,7 +27,7 @@ public class App extends BaseAppNavigator {
     @Override
     public String getHome() {
         //Verificar antes se o usuario ja n esta logado
-        return "PRINCIPAL";
+        return "LOGIN";
     }
 
     @Override
@@ -48,5 +48,9 @@ public class App extends BaseAppNavigator {
                  new ScreenRegistryFXML(App.class,
                         "perfil.fxml",
                         o -> new Perfil(repositorioPassageiro)));
+        registraTela("EDITAR",
+                 new ScreenRegistryFXML(App.class,
+                        "editar.fxml",
+                        o -> new Editar()));
     }
 }

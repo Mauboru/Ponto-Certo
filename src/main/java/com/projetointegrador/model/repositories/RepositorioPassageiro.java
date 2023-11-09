@@ -5,9 +5,13 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.daos.PassageiroDAO;
 import com.projetointegrador.model.entities.Passageiro;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class RepositorioPassageiro {
     private PassageiroDAO passageiroDAO;
     private ArrayList<Passageiro> passageiro;
+    private String email, nome, senha;
 
     public RepositorioPassageiro(PassageiroDAO passageiroDAO) {
         passageiro = new ArrayList<>();
@@ -24,10 +28,6 @@ public class RepositorioPassageiro {
 
         Passageiro passageiro = new Passageiro(nome, email, senha);
         return passageiroDAO.cadastrar(passageiro);
-    }
-
-    public Resultado listar(){
-        return null;
     }
 
     public Resultado atualizar(){
@@ -47,12 +47,20 @@ public class RepositorioPassageiro {
         return passageiroDAO.login(usuario, senha);
     }
 
-    public Resultado logout(){
-        return passageiroDAO.logout();
+    public void saveLogin(String email){
+        this.email = email;
     }
 
-    // Remover essa função
-    public Passageiro teste() {
-        return passageiro.get(0);
+    public String getLogin(){
+        return email;
+    }
+
+    public String getInfo(String email, String tipo){
+        String resultado = passageiroDAO.getInfo(email, tipo);
+        if (resultado.equals("Dados não encontrados!")){
+            Alert alerta = new Alert(AlertType.ERROR, resultado);
+            alerta.showAndWait();
+        }
+        return resultado;
     }
 }

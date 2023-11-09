@@ -123,19 +123,21 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
     }
 
     @Override
-    public Resultado logout(){
-        try(Connection con = fabrica.getConnection()){
-            PreparedStatement pstm = con.prepareStatement(LOGINSQL);
+    public String getInfo(String email, String tipo) {
+        try (Connection con = fabrica.getConnection()) {
+            String GETINFO = "SELECT " + tipo + " FROM PIPassageiro WHERE email=?";
+            PreparedStatement pstm = con.prepareStatement(GETINFO);
+
+            pstm.setString(1, email);
 
             ResultSet rs = pstm.executeQuery();
 
-            if(rs.next()){
-                return Resultado.sucesso("Login feito com Sucesso!", rs);
+            if (rs.next()) {
+                return rs.getString(tipo);
             }
-            return Resultado.erro("Usuario não encontrado!");
-            
-        }catch(SQLException e){
-            return Resultado.erro(e.getMessage());
+            return "Dados não encontrados!";
+        } catch (SQLException e) {
+            return e.getMessage();
         }
     }
 }

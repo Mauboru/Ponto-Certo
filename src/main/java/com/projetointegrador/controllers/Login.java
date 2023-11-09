@@ -37,10 +37,8 @@ public class Login {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
             alerta.showAndWait();
         } else {
-            tfEmail.clear();
-            tfSenha.clear();
+            repositorioPassageiro.saveLogin(usuario);
             App.pushScreen("PRINCIPAL");
         }
-        
     }
 }
