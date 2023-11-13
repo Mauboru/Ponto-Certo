@@ -6,7 +6,7 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.entities.Rota;
 
 public class JDBCRotaDAO implements RotaDAO {
-    private static final String SELECTSQL = "SELECT * FROM PIRota";
+    private static final String SELECTSQL = "SELECT * FROM Linha";
 
     private FabricaConexoes fabrica;
 

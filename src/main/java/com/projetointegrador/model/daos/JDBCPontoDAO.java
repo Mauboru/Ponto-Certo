@@ -6,7 +6,7 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.entities.Ponto;
 
 public class JDBCPontoDAO implements PontoDAO {
-    private static final String SELECTSQL = "SELECT * FROM PIPonto";
+    private static final String SELECTSQL = "SELECT * FROM Ponto";
 
     private FabricaConexoes fabrica;
 

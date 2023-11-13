@@ -6,5 +6,5 @@ Meu sistema para o Projeto Integrador, já encaminhando para o meu TCC, o sistem
 - Editar dados
 - Excluir dados
 - Adicionar nas telas loading para demora de processo
-- Tela Cadastro (verificador de email[formato e igual])
-- Tela Login (inserir recuperação de senha)
+- Tela Cadastro (verificador de email[formato e igual]) //Trigger
+- Tela Login (inserir recuperação de senha) //Funcao

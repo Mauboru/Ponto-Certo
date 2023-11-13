@@ -6,11 +6,11 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.entities.Passageiro;
 
 public class JDBCPassageiroDAO implements PassageiroDAO {
-    private static final String INSERTSQL = "INSERT INTO PIPassageiro(nome, email, senha) VALUES (?, ?, ?)";
-    private static final String SELECTSQL = "SELECT * FROM PIPassageiro";
-    private static final String UPDATESQL = "UPDATE PIPassageiro SET nome=?, email=?, senha=? WHERE id=?";
-    private static final String DELETESQL = "DELETE FROM PIPassageiro WHERE id=?";
-    private static final String LOGINSQL = "SELECT nome FROM PIPassageiro WHERE email=? AND senha=?";
+    private static final String INSERTSQL = "INSERT INTO Passageiro(nome, email, senha) VALUES (?, ?, ?)";
+    private static final String SELECTSQL = "SELECT * FROM Passageiro";
+    private static final String UPDATESQL = "UPDATE Passageiro SET nome=?, email=?, senha=? WHERE id=?";
+    private static final String DELETESQL = "DELETE FROM Passageiro WHERE id=?";
+    private static final String LOGINSQL = "SELECT nome FROM Passageiro WHERE email=? AND senha=?";
 
     private FabricaConexoes fabrica;
 

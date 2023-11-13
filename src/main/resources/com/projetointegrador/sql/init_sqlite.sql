@@ -1,20 +1,52 @@
-CREATE TABLE IF NOT EXISTS PIPassageiro (
+CREATE TABLE IF NOT EXISTS Passageiro (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
     senha VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS PIPonto (
+CREATE TABLE IF NOT EXISTS Ponto (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS PIRota (
+CREATE TABLE IF NOT EXISTS Linha (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(45) NOT NULL,
+    nome VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS LinhaPonto (
+    idLinha INT NOT NULL,
+    idPonto INT NOT NULL,
+    FOREIGN KEY (idLinha) REFERENCES Linha (id),
+    FOREIGN KEY (idPonto) REFERENCES Ponto (id)
+)
+
+CREATE TABLE IF NOT EXISTS Avaliacao (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nota INT NOT NULL,
+    comentario VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Onibus (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(7) NOT NULL,
+    cor VARCHAR(45) NOT NULL,
+    qtdTotalPassageiro INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Viagem (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idPassageiro INT NOT NULL,
+    idAvaliacao INT NOT NULL,
+    idOnibus INT NOT NULL,
+    idRota INT NOT NULL,
     pontoInicial INT NOT NULL,
     pontoFinal INT NOT NULL,
-    FOREIGN KEY (pontoInicial) REFERENCES PIPonto (id),
-    FOREIGN KEY (pontoFinal) REFERENCES PIPonto (id)
+    FOREIGN KEY (idPassageiro) REFERENCES Passageiro (id),
+    FOREIGN KEY (idAvaliacao) REFERENCES Avaliacao (id),
+    FOREIGN KEY (idOnibus) REFERENCES Onibus (id),
+    FOREIGN KEY (idRota) REFERENCES Linha (id),
+    FOREIGN KEY (pontoInicial) REFERENCES Ponto (id),
+    FOREIGN KEY (pontoFinal) REFERENCES Ponto (id)
 );
