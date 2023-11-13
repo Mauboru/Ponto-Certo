@@ -125,7 +125,7 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
     @Override
     public String getInfo(String email, String tipo) {
         try (Connection con = fabrica.getConnection()) {
-            String GETINFO = "SELECT " + tipo + " FROM PIPassageiro WHERE email=?";
+            String GETINFO = "SELECT " + tipo + " FROM Passageiro WHERE email=?";
             PreparedStatement pstm = con.prepareStatement(GETINFO);
 
             pstm.setString(1, email);

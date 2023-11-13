@@ -30,8 +30,9 @@ public class RepositorioPassageiro {
         return passageiroDAO.cadastrar(passageiro);
     }
 
-    public Resultado atualizar(){
-        return null;
+    public Resultado atualizar(int id, String nome, String email, String senha){
+        Passageiro passageiro = new Passageiro(nome, email, senha);
+        return passageiroDAO.atualizar(id, passageiro);
     }
 
     public Resultado deletar(){

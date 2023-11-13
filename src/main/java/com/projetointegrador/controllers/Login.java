@@ -28,16 +28,16 @@ public class Login {
 
     @FXML
     void login(ActionEvent event) {
-        String usuario = tfEmail.getText();
+        String email = tfEmail.getText();
         String senha = tfSenha.getText();
         Alert alerta;
-        Resultado resultado = repositorioPassageiro.login(usuario, senha);
+        Resultado resultado = repositorioPassageiro.login(email, senha);
 
         if (resultado.foiErro()) {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
             alerta.showAndWait();
         } else {
-            repositorioPassageiro.saveLogin(usuario);
+            repositorioPassageiro.saveLogin(email);
             App.pushScreen("PRINCIPAL");
         }
     }

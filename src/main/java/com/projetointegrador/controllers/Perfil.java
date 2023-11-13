@@ -1,9 +1,7 @@
 package com.projetointegrador.controllers;
 
 import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.github.hugoperlin.results.Resultado;
+import java.util.ResourceBundle;    
 import com.projetointegrador.App;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
 import javafx.event.ActionEvent;
@@ -40,7 +38,7 @@ public class Perfil implements Initializable{
 
     @FXML
     void editar(ActionEvent event) {
-        App.pushScreen("EDITAR", o-> new Editar());
+        App.pushScreen("CADASTRAR", o-> new Cadastrar(repositorioPassageiro));
     }
 
     @FXML
@@ -50,6 +48,6 @@ public class Perfil implements Initializable{
 
     @FXML
     void voltar(ActionEvent event) {
-        App.popScreen();
+        App.pushScreen("PRINCIPAL");
     }
 }
