@@ -27,8 +27,9 @@ public class Principal implements Initializable {
     RepositorioPassageiro repositorioPassageiro;
 
     private boolean isViagem = false;
+    private boolean viagemTermino = false;
     private Timeline timer;
-    private int segundos = 30;
+    private int segundos = 5;
 
     @FXML
     private Label lbTimer;
@@ -113,7 +114,7 @@ public class Principal implements Initializable {
 
             iniciarTemporizador();
         }
-        alerta.showAndWait();
+        alerta.show();
     }
 
     void iniciarTemporizador() {
@@ -125,7 +126,11 @@ public class Principal implements Initializable {
     void atualizarTempo() {
         segundos--;
 
-        if (segundos < 0) {
+        if (segundos < 0 && viagemTermino == false) {
+            iniciouViagem(new ActionEvent());
+            return;
+        }
+        if (segundos < 0 && viagemTermino == true) {
             encerrarViagem(new ActionEvent());
             return;
         }
@@ -136,16 +141,29 @@ public class Principal implements Initializable {
     }
 
     @FXML
+    void iniciouViagem(ActionEvent event){
+        Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus chegou!");
+        alerta.show();
+        if(timer != null){
+            timer.stop();
+        }
+        segundos = 12;
+        viagemTermino = true;
+        iniciarTemporizador();
+    }
+
+    @FXML
     void encerrarViagem(ActionEvent event) {
         lbTimer.setText("");
         buttonSair.setText("Iniciar Viagem");
         isViagem = false;
-
-        int novoTempo = (int) Math.random() * (30 - 10 + 1) + 10;
-        segundos = novoTempo;
+        viagemTermino = false;
 
         if(timer != null){
             timer.stop();
         }
+
+        Alert alerta = new Alert(AlertType.INFORMATION, "Viagem terminou!");
+        alerta.show();
     }
 }
