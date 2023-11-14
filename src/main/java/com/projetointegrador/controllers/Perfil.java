@@ -44,6 +44,7 @@ public class Perfil implements Initializable{
     @FXML
     void sair(ActionEvent event) {
         App.pushScreen("LOGIN");
+        repositorioPassageiro.saveLogin(null);
     }
 
     @FXML
