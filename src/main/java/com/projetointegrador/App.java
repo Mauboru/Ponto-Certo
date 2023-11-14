@@ -15,6 +15,9 @@ public class App extends BaseAppNavigator {
     private PontoDAO pontoDAO = new JDBCPontoDAO(FabricaConexoes.getInstance());
     private RepositorioPonto repositorioPonto = new RepositorioPonto(pontoDAO);
 
+    private ViagemDAO viagemDAO = new JDBCViagemDAO(FabricaConexoes.getInstance());
+    private RepositorioViagem repositorioViagem = new RepositorioViagem(viagemDAO);
+
     public static void main(String[] args) {
         launch();
     }
@@ -43,7 +46,7 @@ public class App extends BaseAppNavigator {
         registraTela("PRINCIPAL",
                 new ScreenRegistryFXML(App.class,
                         "principal.fxml",
-                        o -> new Principal(RepositorioLinha, repositorioPonto)));
+                        o -> new Principal(RepositorioLinha, repositorioPonto, repositorioViagem)));
         registraTela("PERFIL",
                 new ScreenRegistryFXML(App.class,
                         "perfil.fxml",

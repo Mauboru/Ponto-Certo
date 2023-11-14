@@ -33,9 +33,10 @@ public class Principal implements Initializable {
     @FXML
     private ImageView imgLinhas;
 
-    public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto) {
+    public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto, RepositorioViagem repositorioViagem) {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
+        this.repositorioViagem = repositorioViagem;
     }
 
     @FXML
@@ -65,7 +66,16 @@ public class Principal implements Initializable {
 
     @FXML
     void iniciaViagem(ActionEvent event) {
-        repositorioViagem.iniciarViagem(cbPontoInicio.getValue(), cbPontoFinal.getValue());
+        Linha linha = cbLinha.getSelectionModel().getSelectedItem();
+        Resultado resultado = repositorioViagem.iniciarViagem(linha, cbPontoInicio.getValue(), cbPontoFinal.getValue());
+        Alert alerta;
+
+        if (resultado.foiErro()) {
+            alerta = new Alert(AlertType.ERROR, resultado.getMsg());
+        } else {
+            alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
+        }
+        alerta.showAndWait();
     }
 
     @Override
