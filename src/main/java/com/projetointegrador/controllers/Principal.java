@@ -48,6 +48,19 @@ public class Principal implements Initializable {
         Linha selecionado = cbLinha.getSelectionModel().getSelectedItem();
         String imagem =  repositorioLinha.gerarRota(selecionado);
         imgLinhas.setImage(new Image(getClass().getResource(imagem).toExternalForm()));
+
+        cbPontoFinal.getItems().clear();
+        cbPontoInicio.getItems().clear();
+
+        Resultado pontos = repositorioLinha.buscarPontosPorLinha(selecionado.getId());
+        if (pontos.foiSucesso()) {
+            List<Ponto> list = (List) pontos.comoSucesso().getObj();
+            cbPontoInicio.getItems().addAll(list);
+            cbPontoFinal.getItems().addAll(list);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, pontos.getMsg());
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -63,16 +76,6 @@ public class Principal implements Initializable {
             cbLinha.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
-            alert.showAndWait();
-        }
-
-        Resultado ponto = repositorioPonto.listar();
-        if (ponto.foiSucesso()) {
-            List<Ponto> list = (List) ponto.comoSucesso().getObj();
-            cbPontoInicio.getItems().addAll(list);
-            cbPontoFinal.getItems().addAll(list);
-        } else {
-            Alert alert = new Alert(AlertType.ERROR, ponto.getMsg());
             alert.showAndWait();
         }
     }

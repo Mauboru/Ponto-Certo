@@ -2,7 +2,7 @@ package com.projetointegrador.model.repositories;
 
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.daos.LinhaDAO;
-import com.projetointegrador.model.entities.Linha;
+import com.projetointegrador.model.entities.*;
 
 public class RepositorioLinha {
     private LinhaDAO linhaDAO;
@@ -13,6 +13,10 @@ public class RepositorioLinha {
 
     public Resultado listar() {
         return linhaDAO.listar();
+    }
+
+    public Resultado buscarPontosPorLinha(int id){
+        return linhaDAO.buscarPontosPorLinha(id);
     }
 
     public String gerarRota(Linha linha){
