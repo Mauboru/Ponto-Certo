@@ -2,6 +2,7 @@ package com.projetointegrador.controllers;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.App;
@@ -22,6 +23,9 @@ public class Principal implements Initializable {
     RepositorioViagem repositorioViagem;
 
     @FXML
+    private Label lbTimer;
+
+    @FXML
     private ComboBox<Linha> cbLinha;
 
     @FXML
@@ -37,6 +41,18 @@ public class Principal implements Initializable {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
         this.repositorioViagem = repositorioViagem;
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        Resultado resultado = repositorioLinha.listar();
+        if (resultado.foiSucesso()) {
+            List<Linha> list = (List) resultado.comoSucesso().getObj();
+            cbLinha.getItems().addAll(list);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -78,15 +94,7 @@ public class Principal implements Initializable {
         alerta.showAndWait();
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        Resultado resultado = repositorioLinha.listar();
-        if (resultado.foiSucesso()) {
-            List<Linha> list = (List) resultado.comoSucesso().getObj();
-            cbLinha.getItems().addAll(list);
-        } else {
-            Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
-            alert.showAndWait();
-        }
+    public void timer(int tempo){
+        System.out.println((tempo * 1000) * 60);
     }
 }

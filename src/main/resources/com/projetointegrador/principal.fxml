@@ -40,6 +40,7 @@
                   <ComboBox fx:id="cbPontoInicio" layoutX="21.0" layoutY="111.0" prefHeight="25.0" prefWidth="136.0" promptText="Ponto Inicial" />
                </children>
             </Pane>
+            <Label fx:id="lbTimer" layoutX="32.0" layoutY="23.0" prefHeight="61.0" prefWidth="126.0" />
          </children>
       </Pane>
    </children>

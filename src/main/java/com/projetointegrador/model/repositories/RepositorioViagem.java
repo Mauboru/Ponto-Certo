@@ -22,7 +22,7 @@ public class RepositorioViagem {
             return Resultado.erro("Não selecione dois pontos iguais!");
         }
         else{
-            return viagemDAO.iniciar();
+            return viagemDAO.cadastrarViagem();
         }
     }
 }
