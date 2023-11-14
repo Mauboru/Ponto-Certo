@@ -40,13 +40,13 @@ CREATE TABLE IF NOT EXISTS Viagem (
     idPassageiro INT NOT NULL,
     idAvaliacao INT NOT NULL,
     idOnibus INT NOT NULL,
-    idRota INT NOT NULL,
+    idLinha INT NOT NULL,
     pontoInicial INT NOT NULL,
     pontoFinal INT NOT NULL,
     FOREIGN KEY (idPassageiro) REFERENCES Passageiro (id),
     FOREIGN KEY (idAvaliacao) REFERENCES Avaliacao (id),
     FOREIGN KEY (idOnibus) REFERENCES Onibus (id),
-    FOREIGN KEY (idRota) REFERENCES Linha (id),
+    FOREIGN KEY (idLinha) REFERENCES Linha (id),
     FOREIGN KEY (pontoInicial) REFERENCES Ponto (id),
     FOREIGN KEY (pontoFinal) REFERENCES Ponto (id)
 );

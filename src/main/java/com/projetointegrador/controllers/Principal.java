@@ -17,12 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class Principal implements Initializable {
-    RepositorioRota repositorioRota;
+    RepositorioLinha repositorioLinha;
     RepositorioPonto repositorioPonto;
     RepositorioViagem repositorioViagem;
 
     @FXML
-    private ComboBox<Rota> cbRota;
+    private ComboBox<Linha> cbLinha;
 
     @FXML
     private ComboBox<Ponto> cbPontoInicio;
@@ -31,10 +31,10 @@ public class Principal implements Initializable {
     private ComboBox<Ponto> cbPontoFinal;
 
     @FXML
-    private ImageView imgRotas;
+    private ImageView imgLinhas;
 
-    public Principal(RepositorioRota repositorioRota, RepositorioPonto repositorioPonto) {
-        this.repositorioRota = repositorioRota;
+    public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto) {
+        this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
     }
 
@@ -44,21 +44,10 @@ public class Principal implements Initializable {
     }
 
     @FXML
-    void atualizaRota(ActionEvent event) {
-        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Porto Seguro")) {
-            imgRotas.setImage(
-                    new Image(getClass().getResource("/com/projetointegrador/img/porto-seguro.PNG").toExternalForm()));
-        }
-
-        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Jardim Iguaçu")) {
-            imgRotas.setImage(
-                    new Image(getClass().getResource("/com/projetointegrador/img/jardim-iguacu.PNG").toExternalForm()));
-        }
-
-        if (cbRota.getSelectionModel().getSelectedItem().getNome().equals("Vila Garcia")) {
-            imgRotas.setImage(
-                    new Image(getClass().getResource("/com/projetointegrador/img/vila-garcia.PNG").toExternalForm()));
-        }
+    void gerarRota(ActionEvent event) {
+        Linha selecionado = cbLinha.getSelectionModel().getSelectedItem();
+        String imagem =  repositorioLinha.gerarRota(selecionado);
+        imgLinhas.setImage(new Image(getClass().getResource(imagem).toExternalForm()));
     }
 
     @FXML
@@ -68,10 +57,10 @@ public class Principal implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        Resultado resultado = repositorioRota.listar();
+        Resultado resultado = repositorioLinha.listar();
         if (resultado.foiSucesso()) {
-            List<Rota> list = (List) resultado.comoSucesso().getObj();
-            cbRota.getItems().addAll(list);
+            List<Linha> list = (List) resultado.comoSucesso().getObj();
+            cbLinha.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
             alert.showAndWait();

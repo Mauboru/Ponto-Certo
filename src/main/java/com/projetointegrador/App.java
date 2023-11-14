@@ -9,12 +9,12 @@ public class App extends BaseAppNavigator {
     private PassageiroDAO passageiroDAO = new JDBCPassageiroDAO(FabricaConexoes.getInstance());
     private RepositorioPassageiro repositorioPassageiro = new RepositorioPassageiro(passageiroDAO);
 
-    private RotaDAO rotaDAO = new JDBCRotaDAO(FabricaConexoes.getInstance());
-    private RepositorioRota repositorioRota = new RepositorioRota(rotaDAO);
+    private LinhaDAO LinhaDAO = new JDBCLinhaDAO(FabricaConexoes.getInstance());
+    private RepositorioLinha RepositorioLinha = new RepositorioLinha(LinhaDAO);
 
     private PontoDAO pontoDAO = new JDBCPontoDAO(FabricaConexoes.getInstance());
     private RepositorioPonto repositorioPonto = new RepositorioPonto(pontoDAO);
-    
+
     public static void main(String[] args) {
         launch();
     }
@@ -26,26 +26,26 @@ public class App extends BaseAppNavigator {
 
     @Override
     public String getHome() {
-        //Verificar antes se o usuario ja n esta logado
+        // Verificar antes se o usuario ja n esta logado
         return "LOGIN";
     }
 
     @Override
     public void registrarTelas() {
-        registraTela("LOGIN", 
-                new ScreenRegistryFXML(App.class, 
-                        "login.fxml", 
+        registraTela("LOGIN",
+                new ScreenRegistryFXML(App.class,
+                        "login.fxml",
                         o -> new Login(repositorioPassageiro)));
         registraTela("CADASTRAR",
-                 new ScreenRegistryFXML(App.class,
+                new ScreenRegistryFXML(App.class,
                         "cadastrar.fxml",
                         o -> new Cadastrar(repositorioPassageiro)));
         registraTela("PRINCIPAL",
-                 new ScreenRegistryFXML(App.class,
+                new ScreenRegistryFXML(App.class,
                         "principal.fxml",
-                        o -> new Principal(repositorioRota, repositorioPonto)));
+                        o -> new Principal(RepositorioLinha, repositorioPonto)));
         registraTela("PERFIL",
-                 new ScreenRegistryFXML(App.class,
+                new ScreenRegistryFXML(App.class,
                         "perfil.fxml",
                         o -> new Perfil(repositorioPassageiro)));
     }

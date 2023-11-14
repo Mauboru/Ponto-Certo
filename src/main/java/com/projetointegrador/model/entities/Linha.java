@@ -1,10 +1,10 @@
 package com.projetointegrador.model.entities;
 
-public class Rota {
+public class Linha {
     private int id;
     private String nome;
 
-    public Rota(int id, String nome) {
+    public Linha(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
