@@ -2,12 +2,15 @@ package com.projetointegrador.controllers;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
+import javafx.util.Duration;
 import com.projetointegrador.App;
 import com.projetointegrador.model.entities.*;
 import com.projetointegrador.model.repositories.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,9 +24,17 @@ public class Principal implements Initializable {
     RepositorioLinha repositorioLinha;
     RepositorioPonto repositorioPonto;
     RepositorioViagem repositorioViagem;
+    RepositorioPassageiro repositorioPassageiro;
+
+    private boolean isViagem = false;
+    private Timeline timer;
+    private int segundos = 30;
 
     @FXML
     private Label lbTimer;
+
+    @FXML
+    private Button buttonSair;
 
     @FXML
     private ComboBox<Linha> cbLinha;
@@ -37,10 +48,12 @@ public class Principal implements Initializable {
     @FXML
     private ImageView imgLinhas;
 
-    public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto, RepositorioViagem repositorioViagem) {
+    public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto,
+            RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro) {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
         this.repositorioViagem = repositorioViagem;
+        this.repositorioPassageiro = repositorioPassageiro;
     }
 
     @Override
@@ -63,7 +76,7 @@ public class Principal implements Initializable {
     @FXML
     void gerarRota(ActionEvent event) {
         Linha selecionado = cbLinha.getSelectionModel().getSelectedItem();
-        String imagem =  repositorioLinha.gerarRota(selecionado);
+        String imagem = repositorioLinha.gerarRota(selecionado);
         imgLinhas.setImage(new Image(getClass().getResource(imagem).toExternalForm()));
 
         cbPontoFinal.getItems().clear();
@@ -82,6 +95,11 @@ public class Principal implements Initializable {
 
     @FXML
     void iniciaViagem(ActionEvent event) {
+        if(isViagem == true){
+            encerrarViagem(event);
+            return;
+        }
+
         Linha linha = cbLinha.getSelectionModel().getSelectedItem();
         Resultado resultado = repositorioViagem.iniciarViagem(linha, cbPontoInicio.getValue(), cbPontoFinal.getValue());
         Alert alerta;
@@ -90,11 +108,44 @@ public class Principal implements Initializable {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
         } else {
             alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
+            buttonSair.setText("Encerrar Viagem");
+            isViagem = true;
+
+            iniciarTemporizador();
         }
         alerta.showAndWait();
     }
 
-    public void timer(int tempo){
-        System.out.println((tempo * 1000) * 60);
+    void iniciarTemporizador() {
+        timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> atualizarTempo()));
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
+    }
+
+    void atualizarTempo() {
+        segundos--;
+
+        if (segundos < 0) {
+            encerrarViagem(new ActionEvent());
+            return;
+        }
+
+        int minutos = segundos / 60;
+        int segundosRestantes = segundos % 60;
+        lbTimer.setText(String.format("Tempo Estimado: %02d:%02d", minutos, segundosRestantes));
+    }
+
+    @FXML
+    void encerrarViagem(ActionEvent event) {
+        lbTimer.setText("");
+        buttonSair.setText("Iniciar Viagem");
+        isViagem = false;
+
+        int novoTempo = (int) Math.random() * (30 - 10 + 1) + 10;
+        segundos = novoTempo;
+
+        if(timer != null){
+            timer.stop();
+        }
     }
 }

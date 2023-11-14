@@ -11,6 +11,22 @@ public class RepositorioViagem {
         this.viagemDAO = viagemDAO;
     }
 
+    public Resultado terminarViagem(Passageiro idPassageiro, Avaliacao idAvaliacao, Onibus idOnibus, Linha idLinha, Ponto pontoInicial, Ponto pontoFinal){
+        if (idLinha == null){
+            return Resultado.erro("Selecione uma linha!");
+        }
+        if (pontoInicial == null || pontoFinal == null){
+            return Resultado.erro("Selecione dois pontos!");
+        }
+        if(pontoInicial == pontoFinal){
+            return Resultado.erro("Não selecione dois pontos iguais!");
+        }
+        else{
+            Viagem viagem = new Viagem(idOnibus, idLinha, idPassageiro, pontoInicial, pontoFinal, idAvaliacao);
+            return viagemDAO.cadastrarViagem(viagem);
+        }
+    }
+
     public Resultado iniciarViagem(Linha linha, Ponto pontoInicial, Ponto pontoFinal){
         if (linha == null){
             return Resultado.erro("Selecione uma linha!");
@@ -22,7 +38,7 @@ public class RepositorioViagem {
             return Resultado.erro("Não selecione dois pontos iguais!");
         }
         else{
-            return viagemDAO.cadastrarViagem();
+            return Resultado.sucesso("Aguarde uns instantes e sua viagem irá começar!", pontoFinal);
         }
     }
 }

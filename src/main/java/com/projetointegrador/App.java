@@ -46,7 +46,7 @@ public class App extends BaseAppNavigator {
         registraTela("PRINCIPAL",
                 new ScreenRegistryFXML(App.class,
                         "principal.fxml",
-                        o -> new Principal(RepositorioLinha, repositorioPonto, repositorioViagem)));
+                        o -> new Principal(RepositorioLinha, repositorioPonto, repositorioViagem, repositorioPassageiro)));
         registraTela("PERFIL",
                 new ScreenRegistryFXML(App.class,
                         "perfil.fxml",
