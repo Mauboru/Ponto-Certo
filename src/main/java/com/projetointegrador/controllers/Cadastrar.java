@@ -1,5 +1,6 @@
 package com.projetointegrador.controllers;
 
+import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
@@ -21,6 +22,12 @@ public class Cadastrar implements Initializable {
     @FXML
     private TextField tfSenha;
 
+    @FXML
+    private Button button;
+
+    @FXML
+    private Button buttonSair;
+
     private RepositorioPassageiro repositorioPassageiro;
 
     public Cadastrar(RepositorioPassageiro repositorioPassageiro) {
@@ -34,6 +41,9 @@ public class Cadastrar implements Initializable {
             tfNome.setText(repositorioPassageiro.getInfo(login, "nome"));
             tfEmail.setText(repositorioPassageiro.getInfo(login, "email"));
             tfSenha.setText(repositorioPassageiro.getInfo(login, "senha"));
+            button.setText("Atualizar");
+            buttonSair.setText("Excluir");
+            buttonSair.setOnAction(event -> excluir(event));
         }
     }
 
@@ -51,7 +61,8 @@ public class Cadastrar implements Initializable {
         } else {
             int id = Integer.parseInt(repositorioPassageiro.getInfo(login, "id"));
             resultado = repositorioPassageiro.atualizar(id, nome, email, senha);
-            App.pushScreen("PERFIL", o-> new Perfil(repositorioPassageiro));
+            repositorioPassageiro.saveLogin(email);
+            App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro));
         }
 
         if (resultado.foiErro()) {
@@ -68,5 +79,20 @@ public class Cadastrar implements Initializable {
     @FXML
     void voltar(ActionEvent event) {
         App.popScreen();
+    }
+
+    @FXML
+    void excluir(ActionEvent event){
+        int id = Integer.parseInt(repositorioPassageiro.getInfo(repositorioPassageiro.getLogin(), "id"));
+        Resultado resultado = repositorioPassageiro.deletar(id);
+        Alert alerta;
+
+        if (resultado.foiErro()) {
+            alerta = new Alert(AlertType.ERROR, resultado.getMsg());
+        } else {
+            alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
+            App.pushScreen("LOGIN");
+        }
+        alerta.showAndWait();
     }
 }

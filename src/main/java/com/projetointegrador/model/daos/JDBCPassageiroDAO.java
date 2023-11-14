@@ -90,7 +90,8 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
     public Resultado deletar(int id) {
         try(Connection con = fabrica.getConnection()){
             PreparedStatement pstm = con.prepareStatement(DELETESQL);
-
+            
+            pstm.setInt(1, id);
             int ret = pstm.executeUpdate();
 
             if(ret == 1){

@@ -35,8 +35,8 @@ public class RepositorioPassageiro {
         return passageiroDAO.atualizar(id, passageiro);
     }
 
-    public Resultado deletar(){
-        return null;
+    public Resultado deletar(int id){
+        return passageiroDAO.deletar(id);
     }
 
     public Resultado login(String usuario, String senha){

@@ -24,6 +24,7 @@
             <Button fx:id="button" layoutX="180.0" layoutY="330.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
             <Button fx:id="buttonSair" layoutX="51.0" layoutY="330.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
             <PasswordField fx:id="tfSenha" layoutX="53.0" layoutY="226.0" prefHeight="25.0" prefWidth="194.0" promptText="Senha" />
+            <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#voltar" text="&lt;-" />
          </children>
       </Pane>
    </children>
