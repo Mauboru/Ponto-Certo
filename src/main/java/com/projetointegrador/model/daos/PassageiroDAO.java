@@ -14,5 +14,7 @@ public interface PassageiroDAO {
 
     Resultado login(String usuario, String senha);
 
+    Resultado getPassageiroLogado(int id);
+
     String getInfo(String email, String tipo);
 }

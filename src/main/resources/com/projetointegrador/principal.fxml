@@ -41,6 +41,7 @@
                </children>
             </Pane>
             <Label fx:id="lbTimer" layoutX="32.0" layoutY="23.0" prefHeight="61.0" prefWidth="126.0" />
+            <ComboBox fx:id="cbPassageiroLogado" layoutX="436.0" layoutY="83.0" prefHeight="27.0" prefWidth="126.0" promptText="Usuario" />
          </children>
       </Pane>
    </children>

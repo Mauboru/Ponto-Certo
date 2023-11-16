@@ -56,6 +56,11 @@ public class RepositorioPassageiro {
         return email;
     }
 
+    public Resultado getPassageiro(){
+        int id = Integer.parseInt(getInfo(getLogin(), "id"));
+        return passageiroDAO.getPassageiroLogado(id);
+    }
+
     public String getInfo(String email, String tipo){
         String resultado = passageiroDAO.getInfo(email, tipo);
         if (resultado.equals("Dados não encontrados!")){

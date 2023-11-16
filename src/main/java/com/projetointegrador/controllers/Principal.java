@@ -34,6 +34,9 @@ public class Principal implements Initializable {
     @FXML
     private Label lbTimer;
 
+    @FXML 
+    private ComboBox<Passageiro> cbPassageiroLogado;
+
     @FXML
     private Button buttonSair;
 
@@ -65,6 +68,15 @@ public class Principal implements Initializable {
             cbLinha.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
+            alert.showAndWait();
+        }
+
+        Resultado passageiro = repositorioPassageiro.getPassageiro();
+        if (passageiro.foiSucesso()) {
+            List<Passageiro> list = (List) passageiro.comoSucesso().getObj();
+            cbPassageiroLogado.getItems().addAll(list);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
             alert.showAndWait();
         }
     }
@@ -117,6 +129,48 @@ public class Principal implements Initializable {
         alerta.show();
     }
 
+    @FXML
+    void encerrarViagem(ActionEvent event) {
+        Passageiro idPassageiro = cbPassageiroLogado.getItems().get(1);
+        Avaliacao idAvaliacao = new Avaliacao(segundos, null);
+        Onibus idOnibus = new Onibus("{null}", null, segundos);
+        Linha idLinha = cbLinha.getSelectionModel().getSelectedItem();
+        Ponto idPontoInicial = cbPontoInicio.getSelectionModel().getSelectedItem();
+        Ponto idPontoFinal = cbPontoFinal.getSelectionModel().getSelectedItem();
+
+
+        lbTimer.setText("");
+        buttonSair.setText("Iniciar Viagem");
+        isViagem = false;
+        viagemTermino = false;
+
+        if(timer != null){
+            timer.stop();
+        }
+
+        Resultado viagem = repositorioViagem.terminarViagem(idPassageiro, idAvaliacao, idOnibus, idLinha, idPontoInicial, idPontoFinal);
+        if (viagem.foiSucesso()) {
+            List<Ponto> list = (List) viagem.comoSucesso().getObj();
+            cbPontoInicio.getItems().addAll(list);
+            cbPontoFinal.getItems().addAll(list);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, viagem.getMsg());
+            alert.showAndWait();
+        }   
+    }
+
+    @FXML
+    void iniciouViagem(ActionEvent event){
+        Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus chegou!");
+        alerta.show();
+        if(timer != null){
+            timer.stop();
+        }
+        segundos = 12;
+        viagemTermino = true;
+        iniciarTemporizador();
+    }
+
     void iniciarTemporizador() {
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> atualizarTempo()));
         timer.setCycleCount(Animation.INDEFINITE);
@@ -138,32 +192,5 @@ public class Principal implements Initializable {
         int minutos = segundos / 60;
         int segundosRestantes = segundos % 60;
         lbTimer.setText(String.format("Tempo Estimado: %02d:%02d", minutos, segundosRestantes));
-    }
-
-    @FXML
-    void iniciouViagem(ActionEvent event){
-        Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus chegou!");
-        alerta.show();
-        if(timer != null){
-            timer.stop();
-        }
-        segundos = 12;
-        viagemTermino = true;
-        iniciarTemporizador();
-    }
-
-    @FXML
-    void encerrarViagem(ActionEvent event) {
-        lbTimer.setText("");
-        buttonSair.setText("Iniciar Viagem");
-        isViagem = false;
-        viagemTermino = false;
-
-        if(timer != null){
-            timer.stop();
-        }
-
-        Alert alerta = new Alert(AlertType.INFORMATION, "Viagem terminou!");
-        alerta.show();
-    }
+    } 
 }

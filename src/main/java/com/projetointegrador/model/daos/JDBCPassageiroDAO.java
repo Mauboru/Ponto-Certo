@@ -3,7 +3,7 @@ package com.projetointegrador.model.daos;
 import java.sql.*;
 import java.util.ArrayList;
 import com.github.hugoperlin.results.Resultado;
-import com.projetointegrador.model.entities.Passageiro;
+import com.projetointegrador.model.entities.*;
 
 public class JDBCPassageiroDAO implements PassageiroDAO {
     private static final String INSERTSQL = "INSERT INTO Passageiro(nome, email, senha) VALUES (?, ?, ?)";
@@ -122,6 +122,26 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
             return Resultado.erro(e.getMessage());
         }
     }
+
+    @Override
+    public Resultado getPassageiroLogado(int id) {
+        try (Connection con = fabrica.getConnection()) {
+            PreparedStatement pstm = con.prepareStatement("SELECT * FROM Passageiro WHERE id=?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<Passageiro> lista = new ArrayList<>();
+
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                Passageiro passageiro = new Passageiro(nome, email, null);
+                lista.add(passageiro);
+            }
+            return Resultado.sucesso("Lista carregada!", lista);
+        } catch (SQLException e) {
+            return Resultado.erro(e.getMessage());
+        }
+    }   
 
     @Override
     public String getInfo(String email, String tipo) {

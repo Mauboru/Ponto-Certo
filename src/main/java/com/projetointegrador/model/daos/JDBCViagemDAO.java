@@ -26,7 +26,6 @@ public class JDBCViagemDAO implements ViagemDAO {
             pstm.setInt(4, viagem.getRota().getId());
             pstm.setInt(5, viagem.getPontoInicial().getId());
             pstm.setInt(6, viagem.getPontoFinal().getId());
-            pstm.setInt(7, viagem.getId());
             
             int ret = pstm.executeUpdate();
 
