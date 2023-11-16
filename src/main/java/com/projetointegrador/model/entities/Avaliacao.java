@@ -9,6 +9,12 @@ public class Avaliacao {
         this.nota = nota;
         this.comentario = comentario;
     }
+    
+    public Avaliacao(int id, int nota, String comentario) {
+        this.nota = nota;
+        this.comentario = comentario;
+        this.id = id;
+    }
 
     public int getId() {
         return id;

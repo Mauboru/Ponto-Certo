@@ -12,6 +12,13 @@ public class Onibus {
         this.qtdTotalPassageiros = qtdTotalPassageiros;
     }
 
+    public Onibus(int id, String placa, String cor, int qtdTotalPassageiros) {
+        this.id = id;
+        this.placa = placa;
+        this.cor = cor;
+        this.qtdTotalPassageiros = qtdTotalPassageiros;
+    }
+
     public int getId() {
         return id;
     }

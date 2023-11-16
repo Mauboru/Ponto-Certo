@@ -61,11 +61,13 @@ public class Principal implements Initializable {
     private ImageView imgLinhas;
 
     public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto,
-            RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro) {
+            RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro, RepositorioOnibus repositorioOnibus, RepositorioAvaliacao repositorioAvaliacao) {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
         this.repositorioViagem = repositorioViagem;
         this.repositorioPassageiro = repositorioPassageiro;
+        this.repositorioOnibus = repositorioOnibus;
+        this.repositorioAvaliacao = repositorioAvaliacao;
     }
 
     @Override
@@ -89,16 +91,6 @@ public class Principal implements Initializable {
             alert.showAndWait();
         }
 
-        Resultado onibus = repositorioOnibus.getOnibus();
-        if (onibus.foiSucesso()) {
-            List<Onibus> list = (List) passageiro.comoSucesso().getObj();
-            cbOnibus.getItems().addAll(list);
-            cbOnibus.getSelectionModel().select(0);
-        } else {
-            Alert alert = new Alert(AlertType.ERROR, onibus.getMsg());
-            alert.showAndWait();
-        }
-
         Resultado avaliacao = repositorioAvaliacao.getAvaliacao();
         if (avaliacao.foiSucesso()) {
             List<Avaliacao> list = (List) avaliacao.comoSucesso().getObj();
@@ -106,6 +98,16 @@ public class Principal implements Initializable {
             cbAvaliacao.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, avaliacao.getMsg());
+            alert.showAndWait();
+        }
+
+        Resultado onibus = repositorioOnibus.getOnibus();
+        if (onibus.foiSucesso()) {
+            List<Onibus> list = (List) onibus.comoSucesso().getObj();
+            cbOnibus.getItems().addAll(list);
+            cbOnibus.getSelectionModel().select(0);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, onibus.getMsg());
             alert.showAndWait();
         }
     }
@@ -161,8 +163,8 @@ public class Principal implements Initializable {
     @FXML
     void encerrarViagem(ActionEvent event) {
         Passageiro idPassageiro = cbPassageiroLogado.getSelectionModel().getSelectedItem();
-        Avaliacao idAvaliacao = new Avaliacao(segundos, null);
-        Onibus idOnibus = new Onibus("{null}", null, segundos);
+        Avaliacao idAvaliacao = cbAvaliacao.getSelectionModel().getSelectedItem();
+        Onibus idOnibus = cbOnibus.getSelectionModel().getSelectedItem();
         Linha idLinha = cbLinha.getSelectionModel().getSelectedItem();
         Ponto idPontoInicial = cbPontoInicio.getSelectionModel().getSelectedItem();
         Ponto idPontoFinal = cbPontoFinal.getSelectionModel().getSelectedItem();
