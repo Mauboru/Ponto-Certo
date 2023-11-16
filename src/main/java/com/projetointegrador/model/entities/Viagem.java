@@ -9,8 +9,7 @@ public class Viagem {
     private Ponto pontoFinal;
     private Avaliacao avaliacao;
     
-    public Viagem(Onibus onibus, Linha rota, Passageiro passageiro, Ponto pontoInicial, Ponto pontoFinal,
-            Avaliacao avaliacao) {
+    public Viagem(Passageiro passageiro, Avaliacao avaliacao, Onibus onibus, Linha rota, Ponto pontoInicial, Ponto pontoFinal) {
         this.onibus = onibus;
         this.rota = rota;
         this.passageiro = passageiro;

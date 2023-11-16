@@ -75,6 +75,7 @@ public class Principal implements Initializable {
         if (passageiro.foiSucesso()) {
             List<Passageiro> list = (List) passageiro.comoSucesso().getObj();
             cbPassageiroLogado.getItems().addAll(list);
+            cbPassageiroLogado.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
             alert.showAndWait();
@@ -131,7 +132,7 @@ public class Principal implements Initializable {
 
     @FXML
     void encerrarViagem(ActionEvent event) {
-        Passageiro idPassageiro = cbPassageiroLogado.getItems().get(1);
+        Passageiro idPassageiro = cbPassageiroLogado.getSelectionModel().getSelectedItem();
         Avaliacao idAvaliacao = new Avaliacao(segundos, null);
         Onibus idOnibus = new Onibus("{null}", null, segundos);
         Linha idLinha = cbLinha.getSelectionModel().getSelectedItem();
@@ -150,9 +151,8 @@ public class Principal implements Initializable {
 
         Resultado viagem = repositorioViagem.terminarViagem(idPassageiro, idAvaliacao, idOnibus, idLinha, idPontoInicial, idPontoFinal);
         if (viagem.foiSucesso()) {
-            List<Ponto> list = (List) viagem.comoSucesso().getObj();
-            cbPontoInicio.getItems().addAll(list);
-            cbPontoFinal.getItems().addAll(list);
+            Alert alert = new Alert(AlertType.INFORMATION, viagem.getMsg());
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(AlertType.ERROR, viagem.getMsg());
             alert.showAndWait();

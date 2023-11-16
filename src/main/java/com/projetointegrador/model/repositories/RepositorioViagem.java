@@ -22,7 +22,7 @@ public class RepositorioViagem {
             return Resultado.erro("Não selecione dois pontos iguais!");
         }
         else{
-            Viagem viagem = new Viagem(idOnibus, idLinha, idPassageiro, pontoInicial, pontoFinal, idAvaliacao);
+            Viagem viagem = new Viagem(idPassageiro, idAvaliacao, idOnibus, idLinha, pontoInicial, pontoFinal);
             return viagemDAO.cadastrarViagem(viagem);
         }
     }

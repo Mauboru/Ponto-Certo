@@ -42,5 +42,10 @@ public class Onibus {
 
     public void setQtdTotalPassageiros(int qtdTotalPassageiros) {
         this.qtdTotalPassageiros = qtdTotalPassageiros;
-    }   
+    }
+    
+    @Override
+    public String toString(){
+        return placa;
+    }
 }

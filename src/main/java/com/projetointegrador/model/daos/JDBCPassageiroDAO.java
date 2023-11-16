@@ -134,7 +134,7 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
             if (rs.next()) {
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
-                Passageiro passageiro = new Passageiro(nome, email, null);
+                Passageiro passageiro = new Passageiro(id, nome, email, null);
                 lista.add(passageiro);
             }
             return Resultado.sucesso("Lista carregada!", lista);

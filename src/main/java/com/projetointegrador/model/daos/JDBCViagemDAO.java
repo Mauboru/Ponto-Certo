@@ -1,8 +1,6 @@
 package com.projetointegrador.model.daos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.entities.Viagem;
 
@@ -18,7 +16,11 @@ public class JDBCViagemDAO implements ViagemDAO {
     @Override
     public Resultado cadastrarViagem(Viagem viagem) {
         try (Connection con = fabrica.getConnection()){
-            PreparedStatement pstm = con.prepareStatement(INSERTSQL);
+            PreparedStatement pstm = con.prepareStatement(INSERTSQL, Statement.RETURN_GENERATED_KEYS);
+
+            System.out.println(viagem.getPassageiro().getId());
+            System.out.println(viagem.getAvaliacao().getId());
+            System.out.println(viagem.getOnibus().getId());
 
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getAvaliacao().getId());
