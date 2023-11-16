@@ -35,7 +35,7 @@ public class Login {
 
         if (resultado.foiErro()) {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
-            alerta.showAndWait();
+            alerta.show();
         } else {
             repositorioPassageiro.saveLogin(email);
             App.pushScreen("PRINCIPAL");

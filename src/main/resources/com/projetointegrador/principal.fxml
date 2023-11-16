@@ -41,9 +41,9 @@
                </children>
             </Pane>
             <Label fx:id="lbTimer" layoutX="32.0" layoutY="23.0" prefHeight="61.0" prefWidth="126.0" />
-            <ComboBox fx:id="cbPassageiroLogado" layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="126.0" promptText="Usuario" />
-            <ComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="37.0" prefHeight="27.0" prefWidth="126.0" promptText="Avaliacao" />
-            <ComboBox fx:id="cbOnibus" layoutX="14.0" layoutY="64.0" prefHeight="27.0" prefWidth="126.0" promptText="Onibus" />
+            <ComboBox fx:id="cbPassageiroLogado" layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="126.0" promptText="Usuario" visible="false" />
+            <ComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="37.0" prefHeight="27.0" prefWidth="126.0" promptText="Avaliacao" visible="false" />
+            <ComboBox fx:id="cbOnibus" layoutX="14.0" layoutY="64.0" prefHeight="27.0" prefWidth="126.0" promptText="Onibus" visible="false" />
          </children>
       </Pane>
    </children>

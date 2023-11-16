@@ -15,12 +15,8 @@ public class JDBCViagemDAO implements ViagemDAO {
 
     @Override
     public Resultado cadastrarViagem(Viagem viagem) {
-        try (Connection con = fabrica.getConnection()){
+        try (Connection con = fabrica.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(INSERTSQL, Statement.RETURN_GENERATED_KEYS);
-
-            System.out.println(viagem.getPassageiro().getId());
-            System.out.println(viagem.getAvaliacao().getId());
-            System.out.println(viagem.getOnibus().getId());
 
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getAvaliacao().getId());
@@ -28,7 +24,7 @@ public class JDBCViagemDAO implements ViagemDAO {
             pstm.setInt(4, viagem.getRota().getId());
             pstm.setInt(5, viagem.getPontoInicial().getId());
             pstm.setInt(6, viagem.getPontoFinal().getId());
-            
+
             int ret = pstm.executeUpdate();
 
             pstm.close();

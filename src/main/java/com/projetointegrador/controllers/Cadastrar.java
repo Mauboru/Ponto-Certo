@@ -73,7 +73,7 @@ public class Cadastrar implements Initializable {
             tfEmail.clear();
             tfSenha.clear();
         }
-        alerta.showAndWait();
+        alerta.show();
     }
 
     @FXML
@@ -82,7 +82,7 @@ public class Cadastrar implements Initializable {
     }
 
     @FXML
-    void excluir(ActionEvent event){
+    void excluir(ActionEvent event) {
         int id = Integer.parseInt(repositorioPassageiro.getInfo(repositorioPassageiro.getLogin(), "id"));
         Resultado resultado = repositorioPassageiro.deletar(id);
         Alert alerta;
@@ -93,6 +93,6 @@ public class Cadastrar implements Initializable {
             alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
             App.pushScreen("LOGIN");
         }
-        alerta.showAndWait();
+        alerta.show();
     }
 }

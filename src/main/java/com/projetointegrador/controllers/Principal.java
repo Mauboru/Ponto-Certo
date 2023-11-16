@@ -36,13 +36,13 @@ public class Principal implements Initializable {
     @FXML
     private Label lbTimer;
 
-    @FXML 
+    @FXML
     private ComboBox<Passageiro> cbPassageiroLogado;
 
-    @FXML 
+    @FXML
     private ComboBox<Avaliacao> cbAvaliacao;
 
-    @FXML 
+    @FXML
     private ComboBox<Onibus> cbOnibus;
 
     @FXML
@@ -61,7 +61,8 @@ public class Principal implements Initializable {
     private ImageView imgLinhas;
 
     public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto,
-            RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro, RepositorioOnibus repositorioOnibus, RepositorioAvaliacao repositorioAvaliacao) {
+            RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro,
+            RepositorioOnibus repositorioOnibus, RepositorioAvaliacao repositorioAvaliacao) {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
         this.repositorioViagem = repositorioViagem;
@@ -78,7 +79,7 @@ public class Principal implements Initializable {
             cbLinha.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, resultado.getMsg());
-            alert.showAndWait();
+            alert.show();
         }
 
         Resultado passageiro = repositorioPassageiro.getPassageiro();
@@ -88,7 +89,7 @@ public class Principal implements Initializable {
             cbPassageiroLogado.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
-            alert.showAndWait();
+            alert.show();
         }
 
         Resultado avaliacao = repositorioAvaliacao.getAvaliacao();
@@ -98,7 +99,7 @@ public class Principal implements Initializable {
             cbAvaliacao.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, avaliacao.getMsg());
-            alert.showAndWait();
+            alert.show();
         }
 
         Resultado onibus = repositorioOnibus.getOnibus();
@@ -108,7 +109,7 @@ public class Principal implements Initializable {
             cbOnibus.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, onibus.getMsg());
-            alert.showAndWait();
+            alert.show();
         }
     }
 
@@ -133,13 +134,13 @@ public class Principal implements Initializable {
             cbPontoFinal.getItems().addAll(list);
         } else {
             Alert alert = new Alert(AlertType.ERROR, pontos.getMsg());
-            alert.showAndWait();
+            alert.show();
         }
     }
 
     @FXML
     void iniciaViagem(ActionEvent event) {
-        if(isViagem == true){
+        if (isViagem == true) {
             encerrarViagem(event);
             return;
         }
@@ -169,31 +170,31 @@ public class Principal implements Initializable {
         Ponto idPontoInicial = cbPontoInicio.getSelectionModel().getSelectedItem();
         Ponto idPontoFinal = cbPontoFinal.getSelectionModel().getSelectedItem();
 
-
         lbTimer.setText("");
         buttonSair.setText("Iniciar Viagem");
         isViagem = false;
         viagemTermino = false;
 
-        if(timer != null){
+        if (timer != null) {
             timer.stop();
         }
 
-        Resultado viagem = repositorioViagem.terminarViagem(idPassageiro, idAvaliacao, idOnibus, idLinha, idPontoInicial, idPontoFinal);
+        Resultado viagem = repositorioViagem.terminarViagem(idPassageiro, idAvaliacao, idOnibus, idLinha,
+                idPontoInicial, idPontoFinal);
         if (viagem.foiSucesso()) {
             Alert alert = new Alert(AlertType.INFORMATION, viagem.getMsg());
-            alert.showAndWait();
+            alert.show();
         } else {
             Alert alert = new Alert(AlertType.ERROR, viagem.getMsg());
-            alert.showAndWait();
-        }   
+            alert.show();
+        }
     }
 
     @FXML
-    void iniciouViagem(ActionEvent event){
+    void iniciouViagem(ActionEvent event) {
         Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus chegou!");
         alerta.show();
-        if(timer != null){
+        if (timer != null) {
             timer.stop();
         }
         segundos = 12;
@@ -222,5 +223,5 @@ public class Principal implements Initializable {
         int minutos = segundos / 60;
         int segundosRestantes = segundos % 60;
         lbTimer.setText(String.format("Tempo Estimado: %02d:%02d", minutos, segundosRestantes));
-    } 
+    }
 }

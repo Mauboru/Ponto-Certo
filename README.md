@@ -2,7 +2,6 @@
 Meu sistema para o Projeto Integrador, já encaminhando para o meu TCC, o sistema tem como objetivo o rastreamento de transportes públicos.
 
 # Adicionar
-- Adicionar meio de coletar passageiro, avaliacao e onibus para adicionar na viagem
 - Adicionar nas telas loading para demora de processo
 - Tela Cadastro (verificador de email[formato e igual]) //Trigger
 - Tela Login (inserir recuperação de senha) //Funcao

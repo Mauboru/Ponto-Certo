@@ -30,16 +30,16 @@ public class RepositorioPassageiro {
         return passageiroDAO.cadastrar(passageiro);
     }
 
-    public Resultado atualizar(int id, String nome, String email, String senha){
+    public Resultado atualizar(int id, String nome, String email, String senha) {
         Passageiro passageiro = new Passageiro(nome, email, senha);
         return passageiroDAO.atualizar(id, passageiro);
     }
 
-    public Resultado deletar(int id){
+    public Resultado deletar(int id) {
         return passageiroDAO.deletar(id);
     }
 
-    public Resultado login(String usuario, String senha){
+    public Resultado login(String usuario, String senha) {
         if (usuario.isEmpty() || usuario.isBlank())
             return Resultado.erro("Insira um usuário!");
         if (senha.isEmpty() || senha.isBlank())
@@ -48,24 +48,24 @@ public class RepositorioPassageiro {
         return passageiroDAO.login(usuario, senha);
     }
 
-    public void saveLogin(String email){
+    public void saveLogin(String email) {
         this.email = email;
     }
 
-    public String getLogin(){
+    public String getLogin() {
         return email;
     }
 
-    public Resultado getPassageiro(){
+    public Resultado getPassageiro() {
         int id = Integer.parseInt(getInfo(getLogin(), "id"));
         return passageiroDAO.getPassageiroLogado(id);
     }
 
-    public String getInfo(String email, String tipo){
+    public String getInfo(String email, String tipo) {
         String resultado = passageiroDAO.getInfo(email, tipo);
-        if (resultado.equals("Dados não encontrados!")){
+        if (resultado.equals("Dados não encontrados!")) {
             Alert alerta = new Alert(AlertType.ERROR, resultado);
-            alerta.showAndWait();
+            alerta.show();
         }
         return resultado;
     }
