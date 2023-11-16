@@ -104,6 +104,44 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
     }
 
     @Override
+    public Resultado verificaEmail(String email) {
+        try (Connection con = fabrica.getConnection()) {
+            CallableStatement cs = con.prepareCall("CALL VerificarEmailPassageiroProc(?)");
+            cs.setString(1, email);
+            cs.execute();
+    
+            return Resultado.sucesso("E-mail válido!", email);
+    
+        } catch (SQLException e) {
+            if ("45000".equals(e.getSQLState())) {
+                String mensagemErro = e.getMessage();
+                return Resultado.erro(mensagemErro);
+            } else {
+                return Resultado.erro(e.getMessage());
+            }
+        }
+    }  
+    
+    @Override
+    public Resultado getSenha(String email) {
+        try (Connection con = fabrica.getConnection()) {
+            PreparedStatement pstm = con.prepareStatement("SELECT senha FROM Passageiro WHERE email=?");
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+    
+            if (rs.next()) {
+                String senha = rs.getString("senha");
+                return Resultado.sucesso("Enviamos sua senha para seu email!", senha);
+            } else {
+                return Resultado.erro("Usuário não encontrado.");
+            }
+    
+        } catch (SQLException e) {
+            return Resultado.erro(e.getMessage());
+        }    
+    }
+
+    @Override
     public Resultado login(String usuario, String senha){
         try(Connection con = fabrica.getConnection()){
             PreparedStatement pstm = con.prepareStatement(LOGINSQL);

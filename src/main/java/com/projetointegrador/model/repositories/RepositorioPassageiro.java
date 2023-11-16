@@ -1,7 +1,11 @@
 package com.projetointegrador.model.repositories;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.util.*;
 import com.github.hugoperlin.results.Resultado;
+import com.google.protobuf.Message;
+import com.mysql.cj.Session;
 import com.projetointegrador.model.daos.PassageiroDAO;
 import com.projetointegrador.model.entities.Passageiro;
 
@@ -22,12 +26,18 @@ public class RepositorioPassageiro {
         if (nome.isEmpty() || nome.isBlank())
             return Resultado.erro("Nome inválido!");
         if (email.isEmpty() || email.isBlank())
-            return Resultado.erro("Email inválido!");
+            return Resultado.erro("Email vazio, coloque seu email!");
         if (senha.isEmpty() || senha.isBlank())
             return Resultado.erro("Senha inválido!");
 
-        Passageiro passageiro = new Passageiro(nome, email, senha);
-        return passageiroDAO.cadastrar(passageiro);
+        // Verificação por Trigger do banco de dados
+        Resultado resultado = passageiroDAO.verificaEmail(email);
+        if (resultado.foiErro()) {
+            return Resultado.erro(resultado.getMsg());
+        } else {
+            Passageiro passageiro = new Passageiro(nome, email, senha);
+            return passageiroDAO.cadastrar(passageiro);
+        }
     }
 
     public Resultado atualizar(int id, String nome, String email, String senha) {
@@ -46,6 +56,32 @@ public class RepositorioPassageiro {
             return Resultado.erro("Insira uma senha!");
 
         return passageiroDAO.login(usuario, senha);
+    }
+
+    public Resultado enviarEmail(String email) {
+        Resultado resultado = passageiroDAO.verificaEmail(email);
+        
+        if (resultado.getMsg().equals("E-mail já cadastrado!")) {
+            Resultado resultadoSenha = passageiroDAO.getSenha(email);
+            
+            if (resultadoSenha.foiSucesso()) {
+                String senha = (String) resultadoSenha.getMsg();
+                boolean envioSucesso = enviarSenhaPorEmail(email, senha);
+
+                if (envioSucesso) {
+                    return Resultado.sucesso("Senha enviada com sucesso para o e-mail: ", email);
+                } else {
+                    return Resultado.erro("Falha ao enviar e-mail com a senha.");
+                }
+            } else {
+                return Resultado.erro(resultadoSenha.getMsg());
+            }
+        }
+        return resultado;
+    }
+
+    private boolean enviarSenhaPorEmail(String email, String senha) {
+        return false;
     }
 
     public void saveLogin(String email) {

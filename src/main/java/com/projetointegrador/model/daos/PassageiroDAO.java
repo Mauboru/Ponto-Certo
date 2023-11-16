@@ -12,6 +12,10 @@ public interface PassageiroDAO {
 
     Resultado deletar(int id);
 
+    Resultado verificaEmail(String email);
+
+    Resultado getSenha(String email);
+
     Resultado login(String usuario, String senha);
 
     Resultado getPassageiroLogado(int id);

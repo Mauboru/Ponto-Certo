@@ -15,6 +15,12 @@ public class Login {
     @FXML
     private TextField tfSenha;
 
+    @FXML
+    private TextField tfEmailRecuperar;
+
+    @FXML
+    private Button buttonSair;
+
     private RepositorioPassageiro repositorioPassageiro;
 
     public Login(RepositorioPassageiro repositorioPassageiro) {
@@ -39,6 +45,30 @@ public class Login {
         } else {
             repositorioPassageiro.saveLogin(email);
             App.pushScreen("PRINCIPAL");
+        }
+    }
+
+    @FXML
+    void mostrarLabel(){
+        buttonSair.setVisible(true);
+        tfEmailRecuperar.setVisible(true);
+    }
+
+    @FXML
+    void enviarEmail(){
+        String email = tfEmailRecuperar.getText();
+        Resultado resultado = repositorioPassageiro.enviarEmail(email);
+        Alert alerta;
+
+        if (resultado.foiErro()){
+            alerta = new Alert(AlertType.ERROR, resultado.getMsg());
+            alerta.show();
+        }
+        else{
+            alerta = new Alert(AlertType.ERROR, resultado.getMsg());
+            alerta.show();
+            buttonSair.setVisible(false);
+            tfEmailRecuperar.setVisible(false);
         }
     }
 }
