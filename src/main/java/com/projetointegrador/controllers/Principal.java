@@ -25,6 +25,8 @@ public class Principal implements Initializable {
     RepositorioPonto repositorioPonto;
     RepositorioViagem repositorioViagem;
     RepositorioPassageiro repositorioPassageiro;
+    RepositorioOnibus repositorioOnibus;
+    RepositorioAvaliacao repositorioAvaliacao;
 
     private boolean isViagem = false;
     private boolean viagemTermino = false;
@@ -36,6 +38,12 @@ public class Principal implements Initializable {
 
     @FXML 
     private ComboBox<Passageiro> cbPassageiroLogado;
+
+    @FXML 
+    private ComboBox<Avaliacao> cbAvaliacao;
+
+    @FXML 
+    private ComboBox<Onibus> cbOnibus;
 
     @FXML
     private Button buttonSair;
@@ -78,6 +86,26 @@ public class Principal implements Initializable {
             cbPassageiroLogado.getSelectionModel().select(0);
         } else {
             Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
+            alert.showAndWait();
+        }
+
+        Resultado onibus = repositorioOnibus.getOnibus();
+        if (onibus.foiSucesso()) {
+            List<Onibus> list = (List) passageiro.comoSucesso().getObj();
+            cbOnibus.getItems().addAll(list);
+            cbOnibus.getSelectionModel().select(0);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, onibus.getMsg());
+            alert.showAndWait();
+        }
+
+        Resultado avaliacao = repositorioAvaliacao.getAvaliacao();
+        if (avaliacao.foiSucesso()) {
+            List<Avaliacao> list = (List) avaliacao.comoSucesso().getObj();
+            cbAvaliacao.getItems().addAll(list);
+            cbAvaliacao.getSelectionModel().select(0);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR, avaliacao.getMsg());
             alert.showAndWait();
         }
     }
