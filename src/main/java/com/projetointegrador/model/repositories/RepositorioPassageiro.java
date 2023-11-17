@@ -1,14 +1,9 @@
 package com.projetointegrador.model.repositories;
 
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.util.*;
 import com.github.hugoperlin.results.Resultado;
-import com.google.protobuf.Message;
-import com.mysql.cj.Session;
 import com.projetointegrador.model.daos.PassageiroDAO;
 import com.projetointegrador.model.entities.Passageiro;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 

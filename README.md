@@ -3,7 +3,6 @@ Meu sistema para o Projeto Integrador, já encaminhando para o meu TCC, o sistem
 
 # Adicionar
 - Tela Login (inserir recuperação de senha) //Funcao
-- Tela Perfil (confirmação para excluir)
 
 # Corrigir
 - Tela de perfil reinicia tela principal e não deveria

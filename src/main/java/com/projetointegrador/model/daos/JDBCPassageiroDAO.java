@@ -9,7 +9,6 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
     private static final String INSERTSQL = "INSERT INTO Passageiro(nome, email, senha) VALUES (?, ?, ?)";
     private static final String SELECTSQL = "SELECT * FROM Passageiro";
     private static final String UPDATESQL = "UPDATE Passageiro SET nome=?, email=?, senha=? WHERE id=?";
-    private static final String DELETESQL = "DELETE FROM Passageiro WHERE id=?";
     private static final String LOGINSQL = "SELECT nome FROM Passageiro WHERE email=? AND senha=?";
 
     private FabricaConexoes fabrica;
@@ -88,17 +87,25 @@ public class JDBCPassageiroDAO implements PassageiroDAO {
 
     @Override
     public Resultado deletar(int id) {
-        try(Connection con = fabrica.getConnection()){
-            PreparedStatement pstm = con.prepareStatement(DELETESQL);
-            
-            pstm.setInt(1, id);
-            int ret = pstm.executeUpdate();
-
-            if(ret == 1){
-                return Resultado.sucesso("Passageiro deletado!", id);
+        try (Connection con = fabrica.getConnection()) {
+            String deleteViagemSQL = "DELETE FROM Viagem WHERE idPassageiro = ?";
+            try (PreparedStatement pstmViagem = con.prepareStatement(deleteViagemSQL)) {
+                pstmViagem.setInt(1, id);
+                pstmViagem.executeUpdate();
             }
-            return Resultado.erro("Erro desconhecido!");
-        }catch(SQLException e){
+    
+            String deletePassageiroSQL = "DELETE FROM Passageiro WHERE id = ?";
+            try (PreparedStatement pstmPassageiro = con.prepareStatement(deletePassageiroSQL)) {
+                pstmPassageiro.setInt(1, id);
+                int ret = pstmPassageiro.executeUpdate();
+    
+                if (ret == 1) {
+                    return Resultado.sucesso("Passageiro deletado!", id);
+                } else {
+                    return Resultado.erro("Erro desconhecido!");
+                }
+            }
+        } catch (SQLException e) {
             return Resultado.erro(e.getMessage());
         }
     }

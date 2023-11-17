@@ -1,6 +1,5 @@
 package com.projetointegrador.controllers;
 
-import java.beans.EventHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
@@ -91,6 +90,7 @@ public class Cadastrar implements Initializable {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
         } else {
             alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
+            repositorioPassageiro.saveLogin(null);
             App.pushScreen("LOGIN");
         }
         alerta.show();
