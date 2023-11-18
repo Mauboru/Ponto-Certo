@@ -83,16 +83,6 @@ public class Principal implements Initializable {
             alert.show();
         }
 
-        // Resultado passageiro = repositorioPassageiro.getPassageiro();
-        // if (passageiro.foiSucesso()) {
-        //     List<Passageiro> list = (List) passageiro.comoSucesso().getObj();
-        //     cbPassageiroLogado.getItems().addAll(list);
-        //     cbPassageiroLogado.getSelectionModel().select(0);
-        // } else {
-        //     Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
-        //     alert.show();
-        // }
-
         Resultado avaliacao = repositorioAvaliacao.getAvaliacao();
         if (avaliacao.foiSucesso()) {
             List<Avaliacao> list = (List) avaliacao.comoSucesso().getObj();
