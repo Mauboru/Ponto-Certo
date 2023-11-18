@@ -25,6 +25,10 @@
             <Button fx:id="buttonSair" layoutX="51.0" layoutY="330.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
             <PasswordField fx:id="tfSenha" layoutX="53.0" layoutY="226.0" prefHeight="25.0" prefWidth="194.0" promptText="Senha" />
             <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#voltar" text="&lt;-" />
+            <!-- <StackPane xmlns="http://javafx.com/javafx" cxmlns:fx="http://javafx.com/fxml" fx:controller="com.projetointegrador.controllers.Cadastrar">
+               <Button text="Mostrar Alerta" onAction="#mostrarAlerta"/>
+               <Button text="Fechar" onAction="#fechar"/>
+            </StackPane> -->
          </children>
       </Pane>
    </children>

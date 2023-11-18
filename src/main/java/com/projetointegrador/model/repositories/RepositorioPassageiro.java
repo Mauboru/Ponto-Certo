@@ -6,14 +6,13 @@ import com.projetointegrador.model.daos.PassageiroDAO;
 import com.projetointegrador.model.entities.Passageiro;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class RepositorioPassageiro {
     private PassageiroDAO passageiroDAO;
-    private ArrayList<Passageiro> passageiro;
-    private String email, nome, senha;
+    private String email;
 
     public RepositorioPassageiro(PassageiroDAO passageiroDAO) {
-        passageiro = new ArrayList<>();
         this.passageiroDAO = passageiroDAO;
     }
 
@@ -41,7 +40,23 @@ public class RepositorioPassageiro {
     }
 
     public Resultado deletar(int id) {
-        return passageiroDAO.deletar(id);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText("Você deseja continuar?");
+        alert.setContentText("Escolha uma opção.");
+
+        ButtonType botaoSim = new ButtonType("Sim");
+        ButtonType botaoNao = new ButtonType("Não");
+
+        alert.getButtonTypes().setAll(botaoSim, botaoNao);
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+        if (resultado.isPresent() && resultado.get() == botaoSim) {
+            return passageiroDAO.deletar(id);
+        } else {
+            alert.close();
+        }
+        return null;
     }
 
     public Resultado login(String usuario, String senha) {
