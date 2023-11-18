@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.App;
+import com.projetointegrador.model.entities.Passageiro;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,18 +29,19 @@ public class Cadastrar implements Initializable {
     private Button buttonSair;
 
     private RepositorioPassageiro repositorioPassageiro;
+    private Passageiro passageiro;
 
-    public Cadastrar(RepositorioPassageiro repositorioPassageiro) {
+    public Cadastrar(RepositorioPassageiro repositorioPassageiro, Passageiro passageiro) {
         this.repositorioPassageiro = repositorioPassageiro;
+        this.passageiro = passageiro;
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        String login = repositorioPassageiro.getLogin();
-        if (login != null) {
-            tfNome.setText(repositorioPassageiro.getInfo(login, "nome"));
-            tfEmail.setText(repositorioPassageiro.getInfo(login, "email"));
-            tfSenha.setText(repositorioPassageiro.getInfo(login, "senha"));
+        if (passageiro != null){
+            tfNome.setText(passageiro.getNome());
+            tfEmail.setText(passageiro.getEmail());
+            tfSenha.setText(passageiro.getSenha());
             button.setText("Atualizar");
             buttonSair.setText("Excluir");
             buttonSair.setOnAction(event -> excluir(event));
@@ -51,17 +53,16 @@ public class Cadastrar implements Initializable {
         String nome = tfNome.getText();
         String email = tfEmail.getText();
         String senha = tfSenha.getText();
-        String login = repositorioPassageiro.getLogin();
         Alert alerta;
         Resultado resultado;
 
-        if (login == null) {
+        if (passageiro == null) {
             resultado = repositorioPassageiro.cadastrar(nome, email, senha);
         } else {
-            int id = Integer.parseInt(repositorioPassageiro.getInfo(login, "id"));
+            int id = Integer.parseInt(repositorioPassageiro.getInfo(passageiro.getEmail(), "id"));
             resultado = repositorioPassageiro.atualizar(id, nome, email, senha);
-            repositorioPassageiro.saveLogin(email);
-            App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro));
+            passageiro = new Passageiro(nome, email, senha);
+            App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro, passageiro));
         }
 
         if (resultado.foiErro()) {
@@ -82,7 +83,7 @@ public class Cadastrar implements Initializable {
 
     @FXML
     void excluir(ActionEvent event) {
-        int id = Integer.parseInt(repositorioPassageiro.getInfo(repositorioPassageiro.getLogin(), "id"));
+        int id = Integer.parseInt(repositorioPassageiro.getInfo(passageiro.getEmail(), "id"));
         Resultado resultado = repositorioPassageiro.deletar(id);
         Alert alerta;
 
@@ -90,7 +91,6 @@ public class Cadastrar implements Initializable {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
         } else {
             alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
-            repositorioPassageiro.saveLogin(null);
             App.pushScreen("LOGIN");
         }
         alerta.show();

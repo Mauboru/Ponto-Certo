@@ -2,6 +2,7 @@ package com.projetointegrador;
 
 import com.projetointegrador.controllers.*;
 import com.projetointegrador.model.daos.*;
+import com.projetointegrador.model.entities.Passageiro;
 import com.projetointegrador.model.repositories.*;
 import io.github.hugoperlin.navigatorfx.*;
 
@@ -23,6 +24,8 @@ public class App extends BaseAppNavigator {
 
     private AvaliacaoDAO avaliacaoDAO = new JDBCAvaliacaoDAO(FabricaConexoes.getInstance());
     private RepositorioAvaliacao repositorioAvaliacao = new RepositorioAvaliacao(avaliacaoDAO);
+
+    private Passageiro passageiro;
 
     public static void main(String[] args) {
         launch();
@@ -48,15 +51,15 @@ public class App extends BaseAppNavigator {
         registraTela("CADASTRAR",
                 new ScreenRegistryFXML(App.class,
                         "cadastrar.fxml",
-                        o -> new Cadastrar(repositorioPassageiro)));
+                        o -> new Cadastrar(repositorioPassageiro, passageiro)));
         registraTela("PRINCIPAL",
                 new ScreenRegistryFXML(App.class,
                         "principal.fxml",
                         o -> new Principal(repositorioLinha, repositorioPonto, repositorioViagem, repositorioPassageiro,
-                        repositorioOnibus, repositorioAvaliacao)));
+                        repositorioOnibus, repositorioAvaliacao, passageiro)));
         registraTela("PERFIL",
                 new ScreenRegistryFXML(App.class,
                         "perfil.fxml",
-                        o -> new Perfil(repositorioPassageiro)));
+                        o -> new Perfil(repositorioPassageiro, passageiro)));
     }
 }

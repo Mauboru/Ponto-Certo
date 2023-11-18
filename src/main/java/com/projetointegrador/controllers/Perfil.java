@@ -3,6 +3,7 @@ package com.projetointegrador.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;    
 import com.projetointegrador.App;
+import com.projetointegrador.model.entities.Passageiro;
 import com.projetointegrador.model.repositories.RepositorioPassageiro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,31 +21,30 @@ public class Perfil implements Initializable{
     private Label tfSenha;
 
     private RepositorioPassageiro repositorioPassageiro;
+    private Passageiro passageiro;
 
-    public Perfil(RepositorioPassageiro repositorioPassageiro) {
+    public Perfil(RepositorioPassageiro repositorioPassageiro, Passageiro passageiro) {
         this.repositorioPassageiro = repositorioPassageiro;
+        this.passageiro = passageiro;
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        String email = repositorioPassageiro.getLogin();
-        String nome = repositorioPassageiro.getInfo(email, "nome");
-        String senha = repositorioPassageiro.getInfo(email, "senha");
-
-        tfEmail.setText(email);
-        tfNome.setText(nome);
-        tfSenha.setText(senha);
+        if (passageiro != null) {
+            tfEmail.setText(passageiro.getEmail());
+            tfNome.setText(passageiro.getNome());
+            tfSenha.setText(passageiro.getSenha());
+        }
     }
 
     @FXML
     void editar(ActionEvent event) {
-        App.pushScreen("CADASTRAR", o-> new Cadastrar(repositorioPassageiro));
+        App.pushScreen("CADASTRAR", o-> new Cadastrar(repositorioPassageiro, passageiro));
     }
 
     @FXML
     void sair(ActionEvent event) {
         App.pushScreen("LOGIN");
-        repositorioPassageiro.saveLogin(null);
     }
 
     @FXML

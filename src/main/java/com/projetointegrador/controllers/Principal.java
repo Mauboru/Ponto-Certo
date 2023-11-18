@@ -21,13 +21,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class Principal implements Initializable {
-    RepositorioLinha repositorioLinha;
-    RepositorioPonto repositorioPonto;
-    RepositorioViagem repositorioViagem;
-    RepositorioPassageiro repositorioPassageiro;
-    RepositorioOnibus repositorioOnibus;
-    RepositorioAvaliacao repositorioAvaliacao;
-
+    private RepositorioLinha repositorioLinha;
+    private RepositorioPonto repositorioPonto;
+    private RepositorioViagem repositorioViagem;
+    private RepositorioPassageiro repositorioPassageiro;
+    private RepositorioOnibus repositorioOnibus;
+    private RepositorioAvaliacao repositorioAvaliacao;
+    private Passageiro passageiro;
     private boolean isViagem = false;
     private boolean viagemTermino = false;
     private Timeline timer;
@@ -62,13 +62,14 @@ public class Principal implements Initializable {
 
     public Principal(RepositorioLinha repositorioLinha, RepositorioPonto repositorioPonto,
             RepositorioViagem repositorioViagem, RepositorioPassageiro repositorioPassageiro,
-            RepositorioOnibus repositorioOnibus, RepositorioAvaliacao repositorioAvaliacao) {
+            RepositorioOnibus repositorioOnibus, RepositorioAvaliacao repositorioAvaliacao, Passageiro passageiro) {
         this.repositorioLinha = repositorioLinha;
         this.repositorioPonto = repositorioPonto;
         this.repositorioViagem = repositorioViagem;
         this.repositorioPassageiro = repositorioPassageiro;
         this.repositorioOnibus = repositorioOnibus;
         this.repositorioAvaliacao = repositorioAvaliacao;
+        this.passageiro = passageiro;
     }
 
     @Override
@@ -82,15 +83,15 @@ public class Principal implements Initializable {
             alert.show();
         }
 
-        Resultado passageiro = repositorioPassageiro.getPassageiro();
-        if (passageiro.foiSucesso()) {
-            List<Passageiro> list = (List) passageiro.comoSucesso().getObj();
-            cbPassageiroLogado.getItems().addAll(list);
-            cbPassageiroLogado.getSelectionModel().select(0);
-        } else {
-            Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
-            alert.show();
-        }
+        // Resultado passageiro = repositorioPassageiro.getPassageiro();
+        // if (passageiro.foiSucesso()) {
+        //     List<Passageiro> list = (List) passageiro.comoSucesso().getObj();
+        //     cbPassageiroLogado.getItems().addAll(list);
+        //     cbPassageiroLogado.getSelectionModel().select(0);
+        // } else {
+        //     Alert alert = new Alert(AlertType.ERROR, passageiro.getMsg());
+        //     alert.show();
+        // }
 
         Resultado avaliacao = repositorioAvaliacao.getAvaliacao();
         if (avaliacao.foiSucesso()) {
@@ -115,7 +116,7 @@ public class Principal implements Initializable {
 
     @FXML
     void exibir(MouseEvent event) {
-        App.pushScreen("PERFIL");
+        App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro, passageiro));
     }
 
     @FXML

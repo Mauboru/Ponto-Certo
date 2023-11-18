@@ -10,7 +10,6 @@ import javafx.scene.control.ButtonType;
 
 public class RepositorioPassageiro {
     private PassageiroDAO passageiroDAO;
-    private String email;
 
     public RepositorioPassageiro(PassageiroDAO passageiroDAO) {
         this.passageiroDAO = passageiroDAO;
@@ -92,19 +91,6 @@ public class RepositorioPassageiro {
 
     private boolean enviarSenhaPorEmail(String email, String senha) {
         return false;
-    }
-
-    public void saveLogin(String email) {
-        this.email = email;
-    }
-
-    public String getLogin() {
-        return email;
-    }
-
-    public Resultado getPassageiro() {
-        int id = Integer.parseInt(getInfo(getLogin(), "id"));
-        return passageiroDAO.getPassageiroLogado(id);
     }
 
     public String getInfo(String email, String tipo) {
