@@ -11,33 +11,32 @@ public class RepositorioViagem {
         this.viagemDAO = viagemDAO;
     }
 
-    public Resultado terminarViagem(Passageiro idPassageiro, Avaliacao idAvaliacao, Onibus idOnibus, Linha idLinha, Ponto pontoInicial, Ponto pontoFinal){
-        if (idLinha == null){
+    public Resultado terminarViagem(Passageiro idPassageiro, Avaliacao idAvaliacao, Onibus idOnibus, Linha idLinha,
+            Ponto pontoInicial, Ponto pontoFinal) {
+        if (idLinha == null) {
             return Resultado.erro("Selecione uma linha!");
         }
-        if (pontoInicial == null || pontoFinal == null){
+        if (pontoInicial == null || pontoFinal == null) {
             return Resultado.erro("Selecione dois pontos!");
         }
-        if(pontoInicial == pontoFinal){
+        if (pontoInicial == pontoFinal) {
             return Resultado.erro("Não selecione dois pontos iguais!");
-        }
-        else{
+        } else {
             Viagem viagem = new Viagem(idPassageiro, idAvaliacao, idOnibus, idLinha, pontoInicial, pontoFinal);
             return viagemDAO.cadastrarViagem(viagem);
         }
     }
 
-    public Resultado iniciarViagem(Linha linha, Ponto pontoInicial, Ponto pontoFinal){
-        if (linha == null){
+    public Resultado iniciarViagem(Linha linha, Ponto pontoInicial, Ponto pontoFinal) {
+        if (linha == null) {
             return Resultado.erro("Selecione uma linha!");
         }
-        if (pontoInicial == null || pontoFinal == null){
+        if (pontoInicial == null || pontoFinal == null) {
             return Resultado.erro("Selecione dois pontos!");
         }
-        if(pontoInicial == pontoFinal){
+        if (pontoInicial == pontoFinal) {
             return Resultado.erro("Não selecione dois pontos iguais!");
-        }
-        else{
+        } else {
             return Resultado.sucesso("Aguarde uns instantes e sua viagem irá começar!", pontoFinal);
         }
     }

@@ -37,9 +37,6 @@ public class Principal implements Initializable {
     private Label lbTimer;
 
     @FXML
-    private ComboBox<Passageiro> cbPassageiroLogado;
-
-    @FXML
     private ComboBox<Avaliacao> cbAvaliacao;
 
     @FXML
@@ -154,7 +151,6 @@ public class Principal implements Initializable {
 
     @FXML
     void encerrarViagem(ActionEvent event) {
-        Passageiro idPassageiro = cbPassageiroLogado.getSelectionModel().getSelectedItem();
         Avaliacao idAvaliacao = cbAvaliacao.getSelectionModel().getSelectedItem();
         Onibus idOnibus = cbOnibus.getSelectionModel().getSelectedItem();
         Linha idLinha = cbLinha.getSelectionModel().getSelectedItem();
@@ -169,8 +165,8 @@ public class Principal implements Initializable {
         if (timer != null) {
             timer.stop();
         }
-
-        Resultado viagem = repositorioViagem.terminarViagem(idPassageiro, idAvaliacao, idOnibus, idLinha,
+        
+        Resultado viagem = repositorioViagem.terminarViagem(passageiro, idAvaliacao, idOnibus, idLinha,
                 idPontoInicial, idPontoFinal);
         if (viagem.foiSucesso()) {
             Alert alert = new Alert(AlertType.INFORMATION, viagem.getMsg());

@@ -5,7 +5,7 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.entities.Viagem;
 
 public class JDBCViagemDAO implements ViagemDAO {
-    private static final String INSERTSQL = "INSERT INTO Viagem(idPassageiro, idAvaliacao, idOnibus, idRota, pontoInicial, pontoFinal) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String INSERTSQL = "INSERT INTO Viagem(idPassageiro, idAvaliacao, idOnibus, idLinha, pontoInicial, pontoFinal) VALUES (?, ?, ?, ?, ?, ?)";
 
     private FabricaConexoes fabrica;
 
@@ -16,8 +16,7 @@ public class JDBCViagemDAO implements ViagemDAO {
     @Override
     public Resultado cadastrarViagem(Viagem viagem) {
         try (Connection con = fabrica.getConnection()) {
-            PreparedStatement pstm = con.prepareStatement(INSERTSQL, Statement.RETURN_GENERATED_KEYS);
-
+            PreparedStatement pstm = con.prepareStatement(INSERTSQL);
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getAvaliacao().getId());
             pstm.setInt(3, viagem.getOnibus().getId());

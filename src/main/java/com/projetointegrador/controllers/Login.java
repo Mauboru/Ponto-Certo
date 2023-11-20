@@ -61,9 +61,10 @@ public class Login {
         String email = tfEmail.getText();
         String senha = tfSenha.getText();
         String nome = repositorioPassageiro.getInfo(email, "nome");
+        int id = Integer.parseInt(repositorioPassageiro.getInfo(email, "id"));
         Alert alerta;
         Resultado resultado = repositorioPassageiro.login(email, senha);
-        Passageiro logado = new Passageiro(nome, email, senha);
+        Passageiro logado = new Passageiro(id, nome, email, senha);
         setPassageiro(logado);
 
         if (resultado.foiErro()) {
