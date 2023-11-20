@@ -43,34 +43,30 @@ public class Login {
 
     private Passageiro passageiro;
 
-    public Login(RepositorioPassageiro repositorioPassageiro) {
+    public Login(RepositorioPassageiro repositorioPassageiro, Passageiro passageiro) {
         this.repositorioPassageiro = repositorioPassageiro;
-    }
-
-    public void setPassageiro(Passageiro passageiro) {
         this.passageiro = passageiro;
     }
 
     @FXML
     void cadastrar(ActionEvent event) {
-        App.pushScreen("CADASTRAR");
+        App.pushScreen("CADASTRAR", o -> new Cadastrar(repositorioPassageiro, passageiro));
     }
 
     @FXML
     void login(ActionEvent event) {
         String email = tfEmail.getText();
         String senha = tfSenha.getText();
-        String nome = repositorioPassageiro.getInfo(email, "nome");
-        int id = Integer.parseInt(repositorioPassageiro.getInfo(email, "id"));
         Alert alerta;
         Resultado resultado = repositorioPassageiro.login(email, senha);
-        Passageiro logado = new Passageiro(id, nome, email, senha);
-        setPassageiro(logado);
-
+        
         if (resultado.foiErro()) {
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
             alerta.show();
         } else {
+            String nome = repositorioPassageiro.getInfo(email, "nome");
+            int id = Integer.parseInt(repositorioPassageiro.getInfo(email, "id"));
+            Passageiro logado = new Passageiro(id, nome, email, senha);
             App.pushScreen("PRINCIPAL", o -> new Principal(repositorioLinha, repositorioPonto, repositorioViagem, repositorioPassageiro, repositorioOnibus, repositorioAvaliacao, logado));
         }
     }

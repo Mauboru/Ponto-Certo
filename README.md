@@ -5,7 +5,7 @@ Meu sistema para o Projeto Integrador, já encaminhando para o meu TCC, o sistem
 - Tela Login (inserir recuperação de senha) //Funcao
 
 # Corrigir
-- Tela de perfil reinicia tela principal e não deveria
+-
 
 # Se sobrar tempo
 - Personalizar sistema e deixar visual mais agrádavel e responsivo

@@ -59,10 +59,10 @@ public class Cadastrar implements Initializable {
         if (passageiro == null) {
             resultado = repositorioPassageiro.cadastrar(nome, email, senha);
         } else {
-            int id = Integer.parseInt(repositorioPassageiro.getInfo(passageiro.getEmail(), "id"));
+            int id = passageiro.getId();
             resultado = repositorioPassageiro.atualizar(id, nome, email, senha);
-            passageiro = new Passageiro(nome, email, senha);
-            App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro, passageiro));
+            Passageiro logado = new Passageiro(id, nome, email, senha);
+            App.pushScreen("PERFIL", o -> new Perfil(repositorioPassageiro, logado));
         }
 
         if (resultado.foiErro()) {

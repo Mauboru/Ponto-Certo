@@ -169,7 +169,7 @@ public class Principal implements Initializable {
         Resultado viagem = repositorioViagem.terminarViagem(passageiro, idAvaliacao, idOnibus, idLinha,
                 idPontoInicial, idPontoFinal);
         if (viagem.foiSucesso()) {
-            Alert alert = new Alert(AlertType.INFORMATION, viagem.getMsg());
+            Alert alert = new Alert(AlertType.INFORMATION, "Sua viagem terminou! ");
             alert.show();
         } else {
             Alert alert = new Alert(AlertType.ERROR, viagem.getMsg());
@@ -179,7 +179,7 @@ public class Principal implements Initializable {
 
     @FXML
     void iniciouViagem(ActionEvent event) {
-        Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus chegou!");
+        Alert alerta = new Alert(AlertType.INFORMATION, "Seu ônibus está proximo!");
         alerta.show();
         if (timer != null) {
             timer.stop();
@@ -209,6 +209,6 @@ public class Principal implements Initializable {
 
         int minutos = segundos / 60;
         int segundosRestantes = segundos % 60;
-        lbTimer.setText(String.format("Tempo Estimado: %02d:%02d", minutos, segundosRestantes));
+        lbTimer.setText(String.format("Tempo Estimado para Chegada: %02d:%02d", minutos, segundosRestantes));
     }
 }

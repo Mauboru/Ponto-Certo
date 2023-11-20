@@ -5,7 +5,6 @@ import com.github.hugoperlin.results.Resultado;
 import com.projetointegrador.model.daos.PassageiroDAO;
 import com.projetointegrador.model.entities.Passageiro;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
 public class RepositorioPassageiro {
@@ -95,10 +94,6 @@ public class RepositorioPassageiro {
 
     public String getInfo(String email, String tipo) {
         String resultado = passageiroDAO.getInfo(email, tipo);
-        if (resultado.equals("Dados não encontrados!")) {
-            Alert alerta = new Alert(AlertType.ERROR, resultado);
-            alerta.show();
-        }
         return resultado;
     }
 }
