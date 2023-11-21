@@ -38,7 +38,7 @@ public class Cadastrar implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        if (passageiro != null){
+        if (passageiro != null) {
             tfNome.setText(passageiro.getNome());
             tfEmail.setText(passageiro.getEmail());
             tfSenha.setText(passageiro.getSenha());
@@ -85,14 +85,11 @@ public class Cadastrar implements Initializable {
     void excluir(ActionEvent event) {
         int id = Integer.parseInt(repositorioPassageiro.getInfo(passageiro.getEmail(), "id"));
         Resultado resultado = repositorioPassageiro.deletar(id);
-        Alert alerta;
 
-        if (resultado.foiErro()) {
-            alerta = new Alert(AlertType.ERROR, resultado.getMsg());
-        } else {
-            alerta = new Alert(AlertType.INFORMATION, resultado.getMsg());
+        if (resultado == null) {
+            //Não faz nada
+        }else{
             App.pushScreen("LOGIN");
         }
-        alerta.show();
     }
 }
