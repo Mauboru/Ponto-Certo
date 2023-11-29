@@ -15,10 +15,6 @@ public class RepositorioLinha {
         return linhaDAO.listar();
     }
 
-    public Resultado buscarPontosPorLinha(int id){
-        return linhaDAO.buscarPontosPorLinha(id);
-    }
-
     public String gerarRota(Linha linha){
         if (linha.getNome().equals("Porto Seguro")) {
             return "/com/projetointegrador/img/porto-seguro.PNG";

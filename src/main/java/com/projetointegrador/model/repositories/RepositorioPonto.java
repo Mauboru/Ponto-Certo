@@ -13,4 +13,8 @@ public class RepositorioPonto {
     public Resultado listar() {
         return pontoDAO.listar();
     }
+
+    public Resultado buscarPontosPorLinha(int id){
+        return pontoDAO.buscarPontosPorLinha(id);
+    }
 }

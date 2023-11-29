@@ -1,12 +1,16 @@
 package com.projetointegrador.model.entities;
 
+import java.util.ArrayList;
+
 public class Linha {
     private int id;
     private String nome;
+    private ArrayList<Ponto> pontos;
 
-    public Linha(int id, String nome) {
+    public Linha(int id, String nome, ArrayList<Ponto> pontos) {
         this.id = id;
         this.nome = nome;
+        this.pontos = pontos;
     }
 
     public int getId() {
@@ -23,6 +27,14 @@ public class Linha {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ArrayList<Ponto> getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(ArrayList<Ponto> pontos) {
+        this.pontos = pontos;
     }
 
     @Override

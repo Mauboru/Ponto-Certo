@@ -8,9 +8,7 @@ import javafx.util.Duration;
 import com.projetointegrador.App;
 import com.projetointegrador.model.entities.*;
 import com.projetointegrador.model.repositories.*;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -115,7 +113,7 @@ public class Principal implements Initializable {
         cbPontoFinal.getItems().clear();
         cbPontoInicio.getItems().clear();
 
-        Resultado pontos = repositorioLinha.buscarPontosPorLinha(selecionado.getId());
+        Resultado pontos = repositorioPonto.buscarPontosPorLinha(selecionado.getId());
         if (pontos.foiSucesso()) {
             List<Ponto> list = (List) pontos.comoSucesso().getObj();
             cbPontoInicio.getItems().addAll(list);

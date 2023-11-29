@@ -61,6 +61,7 @@ public class Login {
         Resultado resultado = repositorioPassageiro.login(email, senha);
         
         if (resultado.foiErro()) {
+            System.out.println(resultado.getMsg());
             alerta = new Alert(AlertType.ERROR, resultado.getMsg());
             alerta.show();
         } else {

@@ -4,4 +4,6 @@ import com.github.hugoperlin.results.Resultado;
 
 public interface PontoDAO {
     Resultado listar();
+
+    Resultado buscarPontosPorLinha(int idLinha);
 }
